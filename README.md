@@ -47,6 +47,8 @@ bun changeset       # describe a change to the published packages
 cd apps/viewer && bun run dev   # the scene viewer on http://localhost:5199/?demo=bolt_sweep
 ```
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for pull requests, changesets and releases.
+
 ## License
 
 Apache-2.0. The bundled robot models keep their own BSD-3-Clause and MIT licenses; see [LICENSE.md](LICENSE.md).
