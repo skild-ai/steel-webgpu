@@ -84,8 +84,8 @@ export interface SceneJson {
   visuals: VisualJson[];
   shapes: ShapeJson[];
   info: SceneInfoJson;
-  /** False when the mouse spring may pull nothing in this scene. */
-  mouse_drag?: boolean;
+  /** False when the mouse spring may pull nothing in this scene; `'all'` when it may also pull the links of driven articulations. */
+  mouse_drag?: boolean | 'all';
 }
 
 export interface LoadedScene {
