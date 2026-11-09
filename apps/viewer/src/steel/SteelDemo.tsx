@@ -296,7 +296,9 @@ function Hud({ hud, title, sceneUrl, controls, setCompare, togglePlay, reset, re
         </div>
         <div hidden={folded}>
           <Stats state={state} />
-          <div style={{ ...styles.muted, marginTop: 6 }}>Drag an object to pull it; scroll while dragging to change depth.</div>
+          {state.scene?.json.mouse_drag !== false && (
+            <div style={{ ...styles.muted, marginTop: 6 }}>Drag an object to pull it; scroll while dragging to change depth.</div>
+          )}
           {children}
           {compare && <Toggle name="compare" label={compare.label} checked={!controls.compareOff} onChange={setCompare} style={styles.compare} />}
           {solver && <SolverControls solver={solver} retune={retune} collision={collision} setCollision={setCollision} />}

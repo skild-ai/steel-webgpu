@@ -39,6 +39,10 @@ SOLVER = {
 }
 
 
+# Scenes the viewer's mouse spring leaves alone.
+NO_MOUSE_DRAG = ("toy_well",)
+
+
 # Collision proxies reworked after export (tools/proxies.py): the washers' and nuts' rings of small
 # boxes interlocked with each other and the bolts' 48-vertex round parts went to MPR, whose normal
 # flickers between facets; one hull each, at most 16 vertices, takes the exact SAT.
@@ -145,6 +149,7 @@ def main(demo, out):
         integral_count=info.get("integral_drive_count", 0),
         control=control_spec(demo, info),
         info=info,
+        mouse_drag=demo not in NO_MOUSE_DRAG,
     )
     if demo in PROXIES:
         import proxies

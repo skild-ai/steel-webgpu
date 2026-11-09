@@ -84,6 +84,8 @@ export interface SceneJson {
   visuals: VisualJson[];
   shapes: ShapeJson[];
   info: SceneInfoJson;
+  /** False when the mouse spring may pull nothing in this scene. */
+  mouse_drag?: boolean;
 }
 
 export interface LoadedScene {

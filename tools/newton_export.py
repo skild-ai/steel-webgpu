@@ -84,14 +84,14 @@ def shape_points(model, s):
 
 def export_model(
     model, out, *, name, solver=None, targets=None, driven=0, integral_count=0, control=None, info=None, twists=None,
-    targets_held=False,
+    targets_held=False, mouse_drag=True,
 ):
     """Write ``scene.json`` and ``scene.bin`` for ``model`` into ``out``.
 
     ``twists`` (bodies x 6: COM linear velocity, angular velocity, world) sets initial free-body
     velocities. ``targets`` (frames x driven, 60 Hz) optionally drives the first ``driven`` dofs of the
     first articulation (interpolated per substep, or held per frame with ``targets_held`` for paths tuned
-    against held targets);
+    against held targets); ``mouse_drag=False`` stops the viewer's mouse spring pulling any body;
     ``control`` names a per-substep controller; ``info`` is free-form
     scene metadata kept in the JSON.
     """
@@ -296,6 +296,7 @@ def export_model(
         "target_frames": targets.shape[0],
         "driven": driven,
         "targets_held": bool(targets_held),
+        "mouse_drag": bool(mouse_drag),
         "integral_count": int(integral_count),
         "demo": name,
         "control": control,

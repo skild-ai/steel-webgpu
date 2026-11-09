@@ -173,9 +173,9 @@ export class Sim {
     this.NB = NB; this.NA = NA; this.NL = NL; this.ND = ND;
     this.bodyKind = bodyKind;
     // Bodies the mouse spring may pull: free bodies and the movable links of articulations without drives
-    // (robots follow their targets); never kinematic bodies.
+    // (robots follow their targets); never kinematic bodies, and nothing when the scene sets mouse_drag false.
     const driven = arts.map((a) => dofs.slice(a.dofStart, a.dofStart + a.dofCount).some((d) => d.ke > 0 || d.kd > 0));
-    this.draggable = bodyKind.map((k, b) => !S.bodies.kinematic?.[b] && (k === 1 || (k === 2 && links[bodyLink[b]].movable && !driven[bodyArt[b]])));
+    this.draggable = bodyKind.map((k, b) => S.mouse_drag !== false && !S.bodies.kinematic?.[b] && (k === 1 || (k === 2 && links[bodyLink[b]].movable && !driven[bodyArt[b]])));
 
     // Hulls.
     const hullIndex = new Map();
