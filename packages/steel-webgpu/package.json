@@ -1,6 +1,6 @@
 {
   "name": "@skild-ai/steel-webgpu",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "WebGPU port of Newton's SolverSteel colored articulated contact path, with three.js and React Three Fiber bindings",
   "keywords": [
     "articulation",
