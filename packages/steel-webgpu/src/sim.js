@@ -232,6 +232,8 @@ export class Sim {
     SU.SU_EDGE = uoff; uoff += nEdges * 4;
     SU.SU_ART = uoff; uoff += Math.max(NA, 1) * 4;
     SU.SU_ACON = uoff; uoff += Math.max(NA, 1);
+    // Baked-target columns: the port dof and coordinate each one drives.
+    SU.SU_DRV = uoff; uoff += Math.max(S.driven, 1) * 2;
     // Collision filter bitset over collision-shape pairs (Newton's filter list).
     SU.SU_FILTER = uoff; uoff += Math.ceil((NS * NS) / 32);
     const statU = new Uint32Array(uoff);
@@ -370,6 +372,16 @@ export class Sim {
     for (const m of mimics) statU[SU.SU_ACON + m.art] = 1;
     loops.forEach((j) => { statU[SU.SU_ACON + bodyArt[J.child[j]]] = 1; });
     statF.set(f32(S.targets), SF.SF_PATH * 4);
+    // Column k drives Newton dof driven_dofs[k] (a scalar joint's); without the list, the first `driven` port dofs.
+    for (let k = 0; k < S.driven; k++) {
+      const nd = S.driven_dofs?.[k];
+      if (nd === undefined) { statU.set([k, k], SU.SU_DRV + k * 2); continue; }
+      const d = dofMap.get(nd);
+      let j = 0;
+      while (J.qd_start[j + 1] <= nd) j++;
+      if (d === undefined || J.qd_start[j + 1] - J.qd_start[j] !== J.q_start[j + 1] - J.q_start[j]) throw new Error(`driven dof ${nd} is not a scalar articulation dof`);
+      statU.set([d, qMap.get(J.q_start[j] + nd - J.qd_start[j])], SU.SU_DRV + k * 2);
+    }
     // Loop closures (ball or revolute) inside one articulation or to the world.
     loops.forEach((j, i) => {
       const t = J.type[j];
@@ -454,7 +466,9 @@ export class Sim {
       A[k] = ao; ao += Math.max(n, 1);
     }
     this.C = {
-      TGT_HELD: S.targets_held ? 1 : 0, NEST: nest ? 1 : 0, MO, NB, NBP: Math.max(NB, 1), NBP2: Math.max(NB, 1) * 2, NCOLW: ncolw, NCOL: ncolw * 32, NS, NA, NAP: Math.max(NA, 1), NL, ND, NDP: Math.max(ND, 1),
+      TGT_HELD: S.targets_held ? 1 : 0, TGT_VEL: S.target_velocity ? 1 : 0,
+      TGT_WRAP: (S.target_loop ?? -1) >= 0 && (S.target_loop ?? -1) < S.target_frames - 1 ? 1 : 0, TGT_LOOP: Math.max(S.target_loop ?? 0, 0),
+      NEST: nest ? 1 : 0, MO, NB, NBP: Math.max(NB, 1), NBP2: Math.max(NB, 1) * 2, NCOLW: ncolw, NCOL: ncolw * 32, NS, NA, NAP: Math.max(NA, 1), NL, ND, NDP: Math.max(ND, 1),
       NLOOP: loops.length, NMIMIC: mimics.length, CTRL_KIND: ctrlKind, CTRL_A: ctrlA, CTRL_B: ctrlB,
       NLP: Math.max(NL, 1), NDA, JDIM: 3 * NDA, MAXDENSE, DHDR, DPS, MAXP, MAXC, MAXU, UH, WH, ROWS, PO, FMO, FMODE: fmode, PATCH: anchorBeta > 0 ? 1 : 0, F_ANCHOR_BETA: anchorBeta,
       EXTRA: anchorBeta > 0 || SV.contact_friction_shared_anchor ? 1 : 0, SHARED: SV.contact_shared_anchor ? 1 : 0, FSHARED: SV.contact_friction_shared_anchor ? 1 : 0,
@@ -657,8 +671,9 @@ export class Sim {
     pass.setBindGroup(0, p.group);
     pass.setBindGroup(1, paramGroup);
     const C = this.C;
-    if (name === 'shapes') pass.dispatchWorkgroups(Math.ceil(C.NS / 64));
-    else if (name === 'broad') pass.dispatchWorkgroups(Math.ceil(C.NS / 16), Math.ceil(C.NS / 16));
+    // A scene without collision shapes (a floating mechanism) has no shape or pair work.
+    if (name === 'shapes') { if (C.NS) pass.dispatchWorkgroups(Math.ceil(C.NS / 64)); }
+    else if (name === 'broad') { if (C.NS) pass.dispatchWorkgroups(Math.ceil(C.NS / 16), Math.ceil(C.NS / 16)); }
     else if (name === 'narrow') pass.dispatchWorkgroupsIndirect(this.buffers.indirect, 0);
     else pass.dispatchWorkgroups(1);
   }

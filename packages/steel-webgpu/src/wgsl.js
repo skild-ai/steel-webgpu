@@ -1811,23 +1811,31 @@ fn main(@builtin(local_invocation_index) tid: u32) {
   // Baked targets (60 Hz samples), interpolated at every substep so the drives see a smooth path at any substep
   // count instead of a step per frame. Sampled at the substep's midpoint half a frame back, so each frame's
   // substeps average to that frame's sample: the timing of a target held per frame, as Newton applies it.
-  // TGT_HELD scenes hold each frame's sample, for paths tuned against that (a ballistic throw).
+  // TGT_HELD scenes hold each frame's sample, for paths tuned against that (a ballistic throw). Past the last
+  // frame the table holds, or (TGT_WRAP) replays from frame TGT_LOOP, the start of its periodic part. With
+  // TGT_VEL the velocity target is the table's slope.
   if (tid < P.driven) {
+    let last = f32(P.path_frames - 1u);
     let ramp = (P.phase + (f32(P.substep) + 0.5) * P.dt) * 60.0 - 0.5;
-    let frame = clamp(select(ramp, P.phase * 60.0, TGT_HELD == 1u), 0.0, f32(P.path_frames - 1u));
+    var frame = select(ramp, P.phase * 60.0, TGT_HELD == 1u);
+    if (TGT_WRAP == 1u && frame > last) { frame = f32(TGT_LOOP) + (frame - f32(TGT_LOOP)) % (last - f32(TGT_LOOP)); }
+    frame = clamp(frame, 0.0, last);
     let a = u32(frame);
     let b = min(a + 1u, P.path_frames - 1u);
     let pa = statF[SF_PATH + (a * P.driven + tid) / 4u][(a * P.driven + tid) % 4u];
     let pb = statF[SF_PATH + (b * P.driven + tid) / 4u][(b * P.driven + tid) % 4u];
     var value = mix(pa, pb, frame - f32(a));
+    let d = statU[SU_DRV + tid * 2u];
     if (tid < P.integral_count) {
+      let qc = statU[SU_DRV + tid * 2u + 1u];
       if (P.substep == 0u) {
-        let err = clamp(value - art[A_Q + tid], -0.08, 0.08);
-        art[A_INT + tid] = clamp(art[A_INT + tid] + 3.0 * P.frame_dt * err, -0.12, 0.12);
+        let err = clamp(value - art[A_Q + qc], -0.08, 0.08);
+        art[A_INT + d] = clamp(art[A_INT + d] + 3.0 * P.frame_dt * err, -0.12, 0.12);
       }
-      value += art[A_INT + tid];
+      value += art[A_INT + d];
     }
-    art[A_TGT + tid] = value;
+    art[A_TGT + d] = value;
+    if (TGT_VEL == 1u) { art[A_TGTV + d] = (pb - pa) * 60.0; }
   }
   // Demo controllers (update_control), every substep.
   if (CTRL_KIND == 1u && tid == 0u) {
