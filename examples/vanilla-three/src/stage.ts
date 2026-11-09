@@ -1,4 +1,4 @@
-import { applyCameraView, applyStudio, createStudioRenderer, DragPull, type SteelWorld } from '@skild-ai/steel-webgpu-three';
+import { applyCameraView, applyStudio, createStudioRenderer, DragPull, type SteelWorld } from '@skild-ai/steel-webgpu/three';
 import { PerspectiveCamera, Scene, type WebGPURenderer } from 'three/webgpu';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 

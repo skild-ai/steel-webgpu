@@ -1,0 +1,97 @@
+{
+  "name": "@skild-ai/steel-webgpu",
+  "version": "0.0.0",
+  "description": "WebGPU port of Newton's SolverSteel colored articulated contact path, with three.js and React Three Fiber bindings",
+  "keywords": [
+    "articulation",
+    "mjcf",
+    "newton",
+    "physics",
+    "physics-engine",
+    "r3f",
+    "react",
+    "react-three-fiber",
+    "rigid-body",
+    "robotics",
+    "simulation",
+    "three",
+    "threejs",
+    "urdf",
+    "webgpu"
+  ],
+  "homepage": "https://github.com/skild-ai/steel-webgpu/tree/main/packages/steel-webgpu#readme",
+  "bugs": "https://github.com/skild-ai/steel-webgpu/issues",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skild-ai/steel-webgpu.git",
+    "directory": "packages/steel-webgpu"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "@skild-ai/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./device": {
+      "@skild-ai/source": "./src/deviceEntry.ts",
+      "types": "./dist/device.d.ts",
+      "default": "./dist/device.js"
+    },
+    "./three": {
+      "@skild-ai/source": "./src/three/index.ts",
+      "types": "./dist/three.d.ts",
+      "default": "./dist/three.js"
+    },
+    "./react": {
+      "@skild-ai/source": "./src/react/index.ts",
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "vp pack",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@types/react": "19.3.0",
+    "@types/three": "0.187.0",
+    "@webgpu/types": "0.1.74",
+    "react": "19.3.1",
+    "three": "0.187.0",
+    "typegpu": "0.12.9"
+  },
+  "peerDependencies": {
+    "@react-three/fiber": "^9.8.2",
+    "react": "^19.0.0",
+    "three": ">=0.187.0",
+    "typegpu": "^0.12.9"
+  },
+  "peerDependenciesMeta": {
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "three": {
+      "optional": true
+    },
+    "typegpu": {
+      "optional": true
+    }
+  }
+}

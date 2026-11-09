@@ -16,8 +16,6 @@
       "dependencies": {
         "@react-three/fiber": "9.8.2",
         "@skild-ai/steel-webgpu": "workspace:*",
-        "@skild-ai/steel-webgpu-react": "workspace:*",
-        "@skild-ai/steel-webgpu-three": "workspace:*",
         "react": "19.3.1",
         "react-dom": "19.3.1",
         "three": "0.187.0",
@@ -38,7 +36,6 @@
       "dependencies": {
         "@react-three/fiber": "9.8.2",
         "@skild-ai/steel-webgpu": "workspace:*",
-        "@skild-ai/steel-webgpu-react": "workspace:*",
         "next": "16.4.4",
         "react": "19.3.1",
         "react-dom": "19.3.1",
@@ -58,7 +55,6 @@
       "dependencies": {
         "@react-three/fiber": "9.8.2",
         "@skild-ai/steel-webgpu": "workspace:*",
-        "@skild-ai/steel-webgpu-react": "workspace:*",
         "react": "19.3.1",
         "react-dom": "19.3.1",
         "three": "0.187.0",
@@ -76,7 +72,6 @@
       "name": "@skild-ai/steel-webgpu-example-vanilla-three",
       "dependencies": {
         "@skild-ai/steel-webgpu": "workspace:*",
-        "@skild-ai/steel-webgpu-three": "workspace:*",
         "three": "0.187.0",
         "typegpu": "0.12.9",
       },
@@ -85,20 +80,9 @@
         "@webgpu/types": "0.1.74",
       },
     },
-    "packages/core": {
+    "packages/steel-webgpu": {
       "name": "@skild-ai/steel-webgpu",
       "version": "0.0.0",
-      "devDependencies": {
-        "@webgpu/types": "0.1.74",
-      },
-    },
-    "packages/react": {
-      "name": "@skild-ai/steel-webgpu-react",
-      "version": "0.0.0",
-      "dependencies": {
-        "@skild-ai/steel-webgpu": "0.0.0",
-        "@skild-ai/steel-webgpu-three": "0.0.0",
-      },
       "devDependencies": {
         "@react-three/fiber": "9.8.2",
         "@types/react": "19.3.0",
@@ -114,23 +98,12 @@
         "three": ">=0.187.0",
         "typegpu": "^0.12.9",
       },
-    },
-    "packages/three": {
-      "name": "@skild-ai/steel-webgpu-three",
-      "version": "0.0.0",
-      "dependencies": {
-        "@skild-ai/steel-webgpu": "0.0.0",
-      },
-      "devDependencies": {
-        "@types/three": "0.187.0",
-        "@webgpu/types": "0.1.74",
-        "three": "0.187.0",
-        "typegpu": "0.12.9",
-      },
-      "peerDependencies": {
-        "three": ">=0.187.0",
-        "typegpu": "^0.12.9",
-      },
+      "optionalPeers": [
+        "@react-three/fiber",
+        "react",
+        "three",
+        "typegpu",
+      ],
     },
   },
   "overrides": {
@@ -370,17 +343,13 @@
 
     "@rolldown/pluginutils": ["@rolldown/pluginutils@1.0.1", "", {}, "sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw=="],
 
-    "@skild-ai/steel-webgpu": ["@skild-ai/steel-webgpu@workspace:packages/core"],
+    "@skild-ai/steel-webgpu": ["@skild-ai/steel-webgpu@workspace:packages/steel-webgpu"],
 
     "@skild-ai/steel-webgpu-example-nextjs": ["@skild-ai/steel-webgpu-example-nextjs@workspace:examples/nextjs"],
 
     "@skild-ai/steel-webgpu-example-react-vite": ["@skild-ai/steel-webgpu-example-react-vite@workspace:examples/react-vite"],
 
     "@skild-ai/steel-webgpu-example-vanilla-three": ["@skild-ai/steel-webgpu-example-vanilla-three@workspace:examples/vanilla-three"],
-
-    "@skild-ai/steel-webgpu-react": ["@skild-ai/steel-webgpu-react@workspace:packages/react"],
-
-    "@skild-ai/steel-webgpu-three": ["@skild-ai/steel-webgpu-three@workspace:packages/three"],
 
     "@skild-ai/steel-webgpu-viewer": ["@skild-ai/steel-webgpu-viewer@workspace:apps/viewer"],
 

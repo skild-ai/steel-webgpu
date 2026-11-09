@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@skild-ai/steel-webgpu": "workspace:*",
-    "@skild-ai/steel-webgpu-three": "workspace:*",
     "three": "0.187.0",
     "typegpu": "0.12.9"
   },

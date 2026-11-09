@@ -1,4 +1,4 @@
-import { Physics, Scene, useSimStats, useWorld, type SceneHandle, type SceneLoadTimes } from '@skild-ai/steel-webgpu-react';
+import { Physics, Scene, useSimStats, useWorld, type SceneHandle, type SceneLoadTimes } from '@skild-ai/steel-webgpu/react';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react';
 import type { SimOptions } from '@skild-ai/steel-webgpu';
