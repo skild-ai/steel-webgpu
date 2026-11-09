@@ -1,3 +1,6 @@
+Copyright 2026 Skild AI
+Copyright 2025 The Newton Developers
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/

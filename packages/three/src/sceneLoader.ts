@@ -1,4 +1,4 @@
-import { loadScene, type BinRange, type LoadedScene } from 'steel-webgpu';
+import { loadScene, type BinRange, type LoadedScene } from '@skild-ai/steel-webgpu';
 import { layoutScene } from './bodyBatches';
 import { geometryJobs, geometryKernels, meshFiles, type BuiltGeometry, type GeometryJob } from './renderGeometry';
 

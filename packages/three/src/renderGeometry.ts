@@ -1,4 +1,4 @@
-import type { HullRef, VisualMeshData, MeshRef } from 'steel-webgpu';
+import type { HullRef, VisualMeshData, MeshRef } from '@skild-ai/steel-webgpu';
 import { geometryKey, type GeometrySource, type SceneLayout } from './bodyBatches';
 
 export type GeometryJob = { key: string; kind: 'mesh'; mesh: MeshRef } | { key: string; kind: 'hull'; hull: HullRef };

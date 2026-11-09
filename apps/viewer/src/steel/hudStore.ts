@@ -1,4 +1,4 @@
-import type { LoadedScene } from 'steel-webgpu';
+import type { LoadedScene } from '@skild-ai/steel-webgpu';
 
 export interface SolverState {
   substeps: number;

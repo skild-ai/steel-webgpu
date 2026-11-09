@@ -1,11 +1,25 @@
 {
-  "name": "steel-webgpu",
-  "version": "0.4.0",
+  "name": "@skild-ai/steel-webgpu",
+  "version": "0.0.0",
   "description": "WebGPU port of Newton's SolverSteel colored articulated contact path",
+  "keywords": [
+    "articulation",
+    "mjcf",
+    "newton",
+    "physics",
+    "physics-engine",
+    "rigid-body",
+    "robotics",
+    "simulation",
+    "urdf",
+    "webgpu"
+  ],
+  "homepage": "https://github.com/skild-ai/steel-webgpu/tree/main/packages/core#readme",
+  "bugs": "https://github.com/skild-ai/steel-webgpu/issues",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/skild-ai/steel-webgpu.git",
+    "url": "git+https://github.com/skild-ai/steel-webgpu.git",
     "directory": "packages/core"
   },
   "files": [
@@ -17,16 +31,20 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "source": "./src/index.ts",
+      "@skild-ai/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
     "./device": {
-      "source": "./src/deviceEntry.ts",
+      "@skild-ai/source": "./src/deviceEntry.ts",
       "types": "./dist/device.d.ts",
       "default": "./dist/device.js"
     },
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "vp pack",

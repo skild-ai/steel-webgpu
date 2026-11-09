@@ -1,6 +1,15 @@
-import { BoxCollider, CapsuleCollider, Ground, RevoluteJoint, RigidBody, SphereCollider, useBeforeStep, type RigidBodyHandle } from '@steel-webgpu/react';
+import {
+  BoxCollider,
+  CapsuleCollider,
+  Ground,
+  RevoluteJoint,
+  RigidBody,
+  SphereCollider,
+  useBeforeStep,
+  type RigidBodyHandle,
+} from '@skild-ai/steel-webgpu-react';
 import { useRef } from 'react';
-import type { Quat, Vec3 } from 'steel-webgpu';
+import type { Quat, Vec3 } from '@skild-ai/steel-webgpu';
 
 const PIVOT: Vec3 = [0.1, 0.35, 0.55];
 const ARM_HALF_LENGTH = 0.15;

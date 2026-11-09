@@ -1,4 +1,4 @@
-import type { LoadedScene, Vec3 } from 'steel-webgpu';
+import type { LoadedScene, Vec3 } from '@skild-ai/steel-webgpu';
 import type { PerspectiveCamera } from 'three/webgpu';
 import { DEFAULT_CAMERA } from './scenePreviewer';
 

@@ -1,5 +1,5 @@
 {
-  "name": "@steel-webgpu/example-react-vite",
+  "name": "@skild-ai/steel-webgpu-example-react-vite",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@react-three/fiber": "9.8.2",
-    "@steel-webgpu/react": "workspace:*",
+    "@skild-ai/steel-webgpu": "workspace:*",
+    "@skild-ai/steel-webgpu-react": "workspace:*",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "steel-webgpu": "workspace:*",
-    "three": "0.187.0"
+    "three": "0.187.0",
+    "typegpu": "0.12.9"
   },
   "devDependencies": {
     "@types/react": "19.3.0",

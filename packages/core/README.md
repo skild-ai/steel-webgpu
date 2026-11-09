@@ -1,4 +1,4 @@
-# steel-webgpu
+# @skild-ai/steel-webgpu
 
 The framework-free engine of [steel-webgpu](https://github.com/skild-ai/steel-webgpu): a WebGPU port of Newton's
 `SolverSteel` (FeatherPGS articulated contact solver). It runs scenes built with `SceneBuilder`, imported from URDF,
@@ -7,13 +7,17 @@ MJCF or USDA, or exported from Newton, with Newton's `State` and `Control` indic
 ## Install
 
 ```bash
-bun add steel-webgpu
+bun add @skild-ai/steel-webgpu
 ```
+
+With npm or pnpm, use `npm install` or `pnpm add` in place of `bun add`.
+TypeScript projects also need [`@webgpu/types`](https://www.npmjs.com/package/@webgpu/types) in `compilerOptions.types`
+for the `GPUDevice` and `GPUBuffer` types in the public API.
 
 ## Usage
 
 ```ts
-import { SceneBuilder, Sim, UnsupportedError, initDevice, loadScene } from 'steel-webgpu';
+import { SceneBuilder, Sim, UnsupportedError, initDevice, loadScene } from '@skild-ai/steel-webgpu';
 
 const b = new SceneBuilder();
 b.addGroundPlane();
@@ -29,13 +33,22 @@ try {
 }
 ```
 
-`steel-webgpu/device` holds the viewer helpers (`metric`, `binCount` and the query-flag readers).
+`@skild-ai/steel-webgpu/device` holds the viewer helpers (`metric`, `binCount` and the query-flag readers).
 
-To draw a scene, use [`@steel-webgpu/three`](https://github.com/skild-ai/steel-webgpu/tree/main/packages/three) or
-[`@steel-webgpu/react`](https://github.com/skild-ai/steel-webgpu/tree/main/packages/react).
-See the [main README](https://github.com/skild-ai/steel-webgpu#readme) for the API table, loaders, browser
-requirements and what is not ported.
+To draw a scene, use [`@skild-ai/steel-webgpu-three`](https://github.com/skild-ai/steel-webgpu/tree/main/packages/three) or
+[`@skild-ai/steel-webgpu-react`](https://github.com/skild-ai/steel-webgpu/tree/main/packages/react).
+## Importing robots
+
+Meshes collide as convex hulls; STL and OBJ load.
+
+```ts
+import { loadMJCF, loadURDF, loadUSDA } from '@skild-ai/steel-webgpu';
+
+await loadURDF(b, urdfText, { baseUrl: urdfUrl, xform: [0, 0, 0.5, 0, 0, 0, 1] });
+await loadMJCF(b, mjcfText, { baseUrl: mjcfUrl });
+loadUSDA(b, usdaText); // text USD with UsdPhysics bodies, colliders, mass, joints and drives
+```
 
 ## License
 
-Apache-2.0, with a BSD-3-Clause robot model; see [LICENSE.md](LICENSE.md).
+Apache-2.0; see [LICENSE.md](LICENSE.md).

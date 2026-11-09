@@ -13,7 +13,7 @@ import {
   Vector3,
 } from 'three/webgpu';
 import { Fn, exp, length, mix, pow, screenUV, vec2, vec3 } from 'three/tsl';
-import type { Vec3 } from 'steel-webgpu';
+import type { Vec3 } from '@skild-ai/steel-webgpu';
 
 // avbd-metal's studio look: a screen-space sky gradient with a warm glow, a 1 m checker floor that
 // fogs into the horizon colour, hemisphere ambient, a warm sun and ACES tone mapping.

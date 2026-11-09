@@ -44,7 +44,7 @@ import {
 } from './posedMaterial';
 import { checkerDataTexture, studioLights } from './studio';
 import { VEC4_PER_POSE } from './poseBridge';
-import type { DragState, LoadedScene, Transform, Vec3 } from 'steel-webgpu';
+import type { DragState, LoadedScene, Transform, Vec3 } from '@skild-ai/steel-webgpu';
 import { geometryJob, geometryKernels, type BuiltGeometry } from './renderGeometry';
 import type { SceneGeometry } from './sceneLoader';
 

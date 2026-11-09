@@ -1,6 +1,6 @@
-import type { SteelWorld, StepCallback } from '@steel-webgpu/three';
+import type { SteelWorld, StepCallback } from '@skild-ai/steel-webgpu-three';
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
-import type { Sim, SimStats } from 'steel-webgpu';
+import type { Sim, SimStats } from '@skild-ai/steel-webgpu';
 import { useWorld } from './context';
 
 function useStepCallback(phase: 'beforeStep' | 'afterStep', callback: StepCallback) {

@@ -3,12 +3,12 @@ import type { NextConfig } from 'next';
 
 const workspaceRoot = fileURLToPath(new URL('../..', import.meta.url));
 
-// Turbopack has no custom export conditions, so the workspace packages are aliased to their sources, as the `source` condition does for Vite.
+// Turbopack has no custom export conditions, so the workspace packages are aliased to their sources, as the `@skild-ai/source` condition does for Vite.
 const workspaceSources = {
-  'steel-webgpu': '../../packages/core/src/index.ts',
-  'steel-webgpu/device': '../../packages/core/src/deviceEntry.ts',
-  '@steel-webgpu/three': '../../packages/three/src/index.ts',
-  '@steel-webgpu/react': '../../packages/react/src/index.ts',
+  '@skild-ai/steel-webgpu': '../../packages/core/src/index.ts',
+  '@skild-ai/steel-webgpu/device': '../../packages/core/src/deviceEntry.ts',
+  '@skild-ai/steel-webgpu-three': '../../packages/three/src/index.ts',
+  '@skild-ai/steel-webgpu-react': '../../packages/react/src/index.ts',
 };
 
 const config: NextConfig = {

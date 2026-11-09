@@ -1,4 +1,4 @@
-import type { SimOptions } from 'steel-webgpu';
+import type { SimOptions } from '@skild-ai/steel-webgpu';
 
 /** The solver controls; unset fields keep the scene's own values. */
 export interface SolverTuning {

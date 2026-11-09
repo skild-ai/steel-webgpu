@@ -1,6 +1,6 @@
 import { expect, test } from 'vite-plus/test';
 import { layoutScene } from '../src/bodyBatches';
-import type { SceneJson } from 'steel-webgpu';
+import type { SceneJson } from '@skild-ai/steel-webgpu';
 
 const range = (off: number) => ({ off, n: 3 });
 const hull = (off: number) => ({ verts: range(off), face_start: range(off + 100), face_verts: range(off + 200), nf: 1 });

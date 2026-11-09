@@ -1,7 +1,7 @@
 import { BufferAttribute, BufferGeometry, Float32BufferAttribute } from 'three';
 import { toCreasedNormals } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { expect, test } from 'vite-plus/test';
-import type { VisualMeshData, MeshRef } from 'steel-webgpu';
+import type { VisualMeshData, MeshRef } from '@skild-ai/steel-webgpu';
 import { geometryKernels } from '../src/renderGeometry';
 
 const { build, meshData } = geometryKernels();

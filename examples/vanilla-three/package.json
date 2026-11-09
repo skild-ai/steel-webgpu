@@ -1,5 +1,5 @@
 {
-  "name": "@steel-webgpu/example-vanilla-three",
+  "name": "@skild-ai/steel-webgpu-example-vanilla-three",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,9 +9,10 @@
     "typecheck": "tsc -p ."
   },
   "dependencies": {
-    "@steel-webgpu/three": "workspace:*",
-    "steel-webgpu": "workspace:*",
-    "three": "0.187.0"
+    "@skild-ai/steel-webgpu": "workspace:*",
+    "@skild-ai/steel-webgpu-three": "workspace:*",
+    "three": "0.187.0",
+    "typegpu": "0.12.9"
   },
   "devDependencies": {
     "@types/three": "0.187.0",

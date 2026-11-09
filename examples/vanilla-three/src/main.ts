@@ -1,5 +1,5 @@
-import { sceneLoader } from '@steel-webgpu/three';
-import { initDevice, UnsupportedError, type SceneEntry } from 'steel-webgpu';
+import { sceneLoader } from '@skild-ai/steel-webgpu-three';
+import { initDevice, UnsupportedError, type SceneEntry } from '@skild-ai/steel-webgpu';
 import { Gallery } from './gallery';
 import { Hud, PLAIN_TITLE } from './hud';
 import { readQuery, setQuery, tuningFlags } from './query';

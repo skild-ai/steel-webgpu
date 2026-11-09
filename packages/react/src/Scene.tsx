@@ -1,7 +1,7 @@
-import { applyCameraView, DragPull, readCameraView, sceneView, SteelWorld, type CameraView, type LoadBreakdown } from '@steel-webgpu/three';
+import { applyCameraView, DragPull, readCameraView, sceneView, SteelWorld, type CameraView, type LoadBreakdown } from '@skild-ai/steel-webgpu-three';
 import { flushSync, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useEffectEvent, useImperativeHandle, useLayoutEffect, useRef, useState, type ReactNode, type Ref } from 'react';
-import type { LoadedScene, SimOptions, Vec3 } from 'steel-webgpu';
+import type { LoadedScene, SimOptions, Vec3 } from '@skild-ai/steel-webgpu';
 import { PerspectiveCamera, type WebGPURenderer } from 'three/webgpu';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { buildScene, useBuildRegistry } from './build';

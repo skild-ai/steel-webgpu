@@ -1,5 +1,5 @@
 import { useContext, useEffect, useEffectEvent, useImperativeHandle, useMemo, useRef, type ReactNode, type Ref } from 'react';
-import type { BodyOptions, D6Axis, DofOptions, JointOptions, Quat, SceneBuilder, ShapeOptions, Transform, Vec3 } from 'steel-webgpu';
+import type { BodyOptions, D6Axis, DofOptions, JointOptions, Quat, SceneBuilder, ShapeOptions, Transform, Vec3 } from '@skild-ai/steel-webgpu';
 import { Quaternion, Vector3 } from 'three/webgpu';
 import { BodyContext, BuildContext, useWorld, type BodySlot, type BuildOp } from './context';
 

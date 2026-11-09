@@ -1,7 +1,7 @@
 import { ACESFilmicToneMapping, PCFShadowMap, PerspectiveCamera, Quaternion, Scene, Vector3, WebGPURenderer } from 'three/webgpu';
-import { loadScene } from 'steel-webgpu';
+import { loadScene } from '@skild-ai/steel-webgpu';
 import { SceneGraph } from './sceneGraph';
-import type { LoadedScene, Vec3 } from 'steel-webgpu';
+import type { LoadedScene, Vec3 } from '@skild-ai/steel-webgpu';
 import { skyNode, studioFog } from './studio';
 
 export const DEFAULT_CAMERA: { eye: Vec3; target: Vec3 } = { eye: [1.25, -1.6, 1.25], target: [0.1, 0.05, 0.15] };

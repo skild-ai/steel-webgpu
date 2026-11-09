@@ -1,4 +1,4 @@
-# @steel-webgpu/react
+# @skild-ai/steel-webgpu-react
 
 React Three Fiber bindings for [steel-webgpu](https://github.com/skild-ai/steel-webgpu). `<Physics>` owns the
 WebGPU device and an R3F canvas on it; `<Scene>` loads a scene folder or builds one from declarative bodies, joints
@@ -7,15 +7,18 @@ and robots; hooks run code around every physics step.
 ## Install
 
 ```bash
-bun add @steel-webgpu/react three @react-three/fiber react react-dom
+bun add @skild-ai/steel-webgpu-react three typegpu @react-three/fiber react react-dom
 ```
 
-`three` 0.187+, `react` 19+ and `@react-three/fiber` 9.8+ are peer dependencies.
+With npm or pnpm, use `npm install` or `pnpm add` in place of `bun add`.
+`three` 0.187+, `typegpu` 0.12, `react` 19 and `@react-three/fiber` 9.8+ are peer dependencies.
+TypeScript projects also need [`@webgpu/types`](https://www.npmjs.com/package/@webgpu/types) in `compilerOptions.types`
+for the `GPUDevice` and `GPUBuffer` types in the public API.
 
 ## Usage
 
 ```tsx
-import { BoxCollider, Ground, Physics, RevoluteJoint, RigidBody, Scene, SphereCollider, useSimStats } from '@steel-webgpu/react';
+import { BoxCollider, Ground, Physics, RevoluteJoint, RigidBody, Scene, SphereCollider, useSimStats } from '@skild-ai/steel-webgpu-react';
 
 export const Folder = () => (
   <Physics unsupported={(reason) => <p>This browser cannot run steel-webgpu: {reason}</p>}>
@@ -75,8 +78,7 @@ export function Framed() {
 ```
 
 Hooks go inside `<Scene>`. The [React + Vite](https://github.com/skild-ai/steel-webgpu/tree/main/examples/react-vite)
-and [Next.js](https://github.com/skild-ai/steel-webgpu/tree/main/examples/nextjs) examples show complete apps; see
-the [main README](https://github.com/skild-ai/steel-webgpu#readme) for the rest.
+and [Next.js](https://github.com/skild-ai/steel-webgpu/tree/main/examples/nextjs) examples show complete apps.
 
 ## License
 

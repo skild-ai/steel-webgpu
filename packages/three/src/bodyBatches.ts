@@ -1,4 +1,4 @@
-import type { HullRef, MeshRef, Quat, SceneJson, Transform, Vec3 } from 'steel-webgpu';
+import type { HullRef, MeshRef, Quat, SceneJson, Transform, Vec3 } from '@skild-ai/steel-webgpu';
 
 export type GeometrySource = { kind: 'mesh'; mesh: MeshRef } | { kind: 'hull'; hull: HullRef };
 

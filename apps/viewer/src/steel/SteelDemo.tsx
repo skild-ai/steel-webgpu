@@ -1,8 +1,8 @@
-import { Physics, Scene, useSimStats, useWorld, type SceneHandle, type SceneLoadTimes } from '@steel-webgpu/react';
+import { Physics, Scene, useSimStats, useWorld, type SceneHandle, type SceneLoadTimes } from '@skild-ai/steel-webgpu-react';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react';
-import type { SimOptions } from 'steel-webgpu';
-import { metric } from 'steel-webgpu/device';
+import type { SimOptions } from '@skild-ai/steel-webgpu';
+import { metric } from '@skild-ai/steel-webgpu/device';
 import { HudStore, initialHud, type HudState, type SolverState } from './hudStore';
 import { checkboxStyle, styles } from './styles';
 

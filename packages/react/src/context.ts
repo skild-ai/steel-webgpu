@@ -1,6 +1,6 @@
-import type { SteelWorld } from '@steel-webgpu/three';
+import type { SteelWorld } from '@skild-ai/steel-webgpu-three';
 import { createContext, useContext } from 'react';
-import type { SceneBuilder } from 'steel-webgpu';
+import type { SceneBuilder } from '@skild-ai/steel-webgpu';
 
 export const DeviceContext = createContext<GPUDevice | null>(null);
 export const WorldContext = createContext<SteelWorld | null>(null);

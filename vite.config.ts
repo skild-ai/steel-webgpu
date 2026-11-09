@@ -14,7 +14,7 @@ export default defineConfig({
     ignorePatterns: ['**/dist/**', '**/node_modules/**', '**/.next/**', ...upstream],
   },
   // Tests import the workspace packages from source, so they run without a prior build.
-  ssr: { resolve: { conditions: ['source'] } },
+  ssr: { resolve: { conditions: ['@skild-ai/source'] } },
   test: {
     include: ['packages/*/test/**/*.test.ts'],
   },

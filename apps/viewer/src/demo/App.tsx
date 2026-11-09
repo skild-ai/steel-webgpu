@@ -3,7 +3,7 @@ import { SteelDemo } from '../steel/SteelDemo';
 import type { SolverTuning } from '../steel/SteelDemo';
 import { byCategory } from './byCategory';
 import { Gallery } from './Gallery';
-import type { SceneEntry } from 'steel-webgpu';
+import type { SceneEntry } from '@skild-ai/steel-webgpu';
 import { styles } from '../steel/styles';
 
 const ASSETS_BASE = `${import.meta.env.BASE_URL}assets`;

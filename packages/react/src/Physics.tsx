@@ -1,8 +1,8 @@
-import { applyStudio, createStudioRenderer, sceneLoader } from '@steel-webgpu/three';
+import { applyStudio, createStudioRenderer, sceneLoader } from '@skild-ai/steel-webgpu-three';
 import { Canvas, type CanvasProps, type RootState } from '@react-three/fiber';
 import { useEffect, useEffectEvent, useState, type ReactNode } from 'react';
 import type { WebGPURenderer } from 'three/webgpu';
-import { initDevice, UnsupportedError } from 'steel-webgpu';
+import { initDevice, UnsupportedError } from '@skild-ai/steel-webgpu';
 import { DeviceContext } from './context';
 
 export interface PhysicsProps extends Omit<CanvasProps, 'gl' | 'children'> {

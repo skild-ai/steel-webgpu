@@ -1,5 +1,5 @@
 import { useContext, useEffect, useEffectEvent, useImperativeHandle, useMemo, type Ref } from 'react';
-import { loadMJCF, loadURDF, type LoadedRobot, type RobotOptions, type SceneBuilder, type Transform } from 'steel-webgpu';
+import { loadMJCF, loadURDF, type LoadedRobot, type RobotOptions, type SceneBuilder, type Transform } from '@skild-ai/steel-webgpu';
 import { BuildContext, useWorld } from './context';
 
 export interface RobotHandle {

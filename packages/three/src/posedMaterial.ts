@@ -1,7 +1,7 @@
 import { Color, MeshStandardNodeMaterial, SRGBColorSpace, type Node, type StorageBufferNode, type Texture } from 'three/webgpu';
 import { Fn, attribute, batchIndirectIndex, cross, int, materialColor, normalLocal, positionLocal } from 'three/tsl';
 import { VEC4_PER_POSE } from './poseBridge';
-import type { Vec3 } from 'steel-webgpu';
+import type { Vec3 } from '@skild-ai/steel-webgpu';
 
 export const PIECE_OFFSET = 'pieceOffset';
 export const PIECE_ROTATION = 'pieceRotation';

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vite-plus/test';
-import type { LoadedScene } from 'steel-webgpu';
+import type { LoadedScene } from '@skild-ai/steel-webgpu';
 import { PerspectiveCamera } from 'three/webgpu';
 import { applyCameraView, readCameraView, sceneView, type CameraView } from '../src/cameraView';
 import { DEFAULT_CAMERA } from '../src/scenePreviewer';

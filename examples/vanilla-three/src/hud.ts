@@ -1,4 +1,4 @@
-import type { LoadedScene, SceneEntry } from 'steel-webgpu';
+import type { LoadedScene, SceneEntry } from '@skild-ai/steel-webgpu';
 import { byCategory } from './byCategory';
 import type { SolverTuning } from './query';
 

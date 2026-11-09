@@ -3,7 +3,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/skild-ai/steel-webgpu.git"
+    "url": "git+https://github.com/skild-ai/steel-webgpu.git"
   },
   "workspaces": [
     "packages/*",
@@ -17,9 +17,11 @@
     "check": "vp check",
     "lint": "vp lint",
     "fmt": "vp fmt",
-    "test": "vp test"
+    "test": "vp test",
+    "changeset": "changeset"
   },
   "devDependencies": {
+    "@changesets/cli": "3.0.3",
     "typescript": "7.0.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@1.5.0",
     "vite-plus": "1.5.0"

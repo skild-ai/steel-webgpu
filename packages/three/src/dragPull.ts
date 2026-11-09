@@ -1,6 +1,6 @@
 import { Plane, Raycaster, Vector2, Vector3, type PerspectiveCamera } from 'three/webgpu';
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import type { DragState } from 'steel-webgpu';
+import type { DragState } from '@skild-ai/steel-webgpu';
 import type { SceneGraph } from './sceneGraph';
 
 export interface PullTarget {

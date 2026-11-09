@@ -1,4 +1,4 @@
-import { Sim, type DragState, type LoadedScene, type SimOptions, type SimStats } from 'steel-webgpu';
+import { Sim, type DragState, type LoadedScene, type SimOptions, type SimStats } from '@skild-ai/steel-webgpu';
 import type { Camera, Scene, WebGPUBackend, WebGPURenderer } from 'three/webgpu';
 import { sceneView, type CameraView } from './cameraView';
 import type { PullTarget } from './dragPull';
@@ -7,7 +7,6 @@ import { PoseBridge } from './poseBridge';
 import { SceneGraph } from './sceneGraph';
 import { DEFAULT_CAMERA } from './scenePreviewer';
 import { sceneLoader } from './sceneLoader';
-
 
 export type StepCallback = (sim: Sim) => void;
 

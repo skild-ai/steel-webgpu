@@ -1,4 +1,4 @@
-import type { SceneEntry } from 'steel-webgpu';
+import type { SceneEntry } from '@skild-ai/steel-webgpu';
 
 /** Scenes grouped by category for the picker and the gallery, both in index order. */
 export function byCategory(scenes: SceneEntry[]): [string, SceneEntry[]][] {

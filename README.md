@@ -10,11 +10,25 @@ A browser with WebGPU: Chrome, Edge or Safari, on desktop or mobile.
 
 | Package | |
 | --- | --- |
-| [`steel-webgpu`](packages/core) | The engine: `Sim`, `SceneBuilder`, scene loading, URDF, MJCF and USDA import |
-| [`@steel-webgpu/three`](packages/three) | three.js rendering, picking and drag |
-| [`@steel-webgpu/react`](packages/react) | React Three Fiber components and hooks |
+| [`@skild-ai/steel-webgpu`](packages/core) | The engine: `Sim`, `SceneBuilder`, scene loading, URDF, MJCF and USDA import |
+| [`@skild-ai/steel-webgpu-three`](packages/three) | three.js rendering, picking and drag |
+| [`@skild-ai/steel-webgpu-react`](packages/react) | React Three Fiber components and hooks |
 
-Each package's README shows its install and usage. Newton models export to a scene folder with `tools/newton_export.py`.
+## Install
+
+```bash
+# The engine alone
+bun add @skild-ai/steel-webgpu
+
+# With three.js
+bun add @skild-ai/steel-webgpu-three @skild-ai/steel-webgpu three typegpu
+
+# With React Three Fiber
+bun add @skild-ai/steel-webgpu-react three typegpu @react-three/fiber react react-dom
+```
+
+With npm or pnpm, use `npm install` or `pnpm add` in place of `bun add`. Each package's README has a quick start.
+Newton models export to a scene folder with `tools/newton_export.py`.
 
 ## Development
 
@@ -26,6 +40,7 @@ bunx vp check       # format and lint
 bunx vp test        # unit tests
 bun run typecheck
 bun run build
+bun changeset       # describe a change to the published packages
 cd apps/viewer && bun run dev   # the scene viewer on http://localhost:5199/?demo=bolt_sweep
 ```
 

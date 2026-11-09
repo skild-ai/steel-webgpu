@@ -1,6 +1,6 @@
-import { sceneLoader, SteelWorld, type LoadBreakdown } from '@steel-webgpu/three';
-import type { LoadedScene, SimOptions } from 'steel-webgpu';
-import { metric } from 'steel-webgpu/device';
+import { sceneLoader, SteelWorld, type LoadBreakdown } from '@skild-ai/steel-webgpu-three';
+import type { LoadedScene, SimOptions } from '@skild-ai/steel-webgpu';
+import { metric } from '@skild-ai/steel-webgpu/device';
 import type { Hud, SolverState } from './hud';
 import type { SolverTuning } from './query';
 import type { Stage } from './stage';

@@ -3,6 +3,6 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
   plugins: [react()],
-  resolve: { conditions: ['source'] },
+  resolve: { conditions: ['@skild-ai/source'] },
   build: { target: 'es2022' },
 });

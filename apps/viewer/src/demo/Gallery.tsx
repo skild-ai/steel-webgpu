@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { prefetchScene, ScenePreviewer } from '@steel-webgpu/three';
-import type { SceneEntry } from 'steel-webgpu';
+import { prefetchScene, ScenePreviewer } from '@skild-ai/steel-webgpu-three';
+import type { SceneEntry } from '@skild-ai/steel-webgpu';
 import { byCategory } from './byCategory';
 import { galleryStyles as css } from './galleryStyles';
 

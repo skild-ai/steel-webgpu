@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SceneBuilder, type LoadedScene, type Vec3 } from 'steel-webgpu';
+import { SceneBuilder, type LoadedScene, type Vec3 } from '@skild-ai/steel-webgpu';
 import type { BodyNames, BuildOp, BuildRegistry } from './context';
 
 export interface DeclarativeOptions {
