@@ -1,0 +1,296 @@
+[
+ {
+  "name": "plate_rack",
+  "title": "Plate rack",
+  "about": "A two-finger gripper picks a dinner plate up by its rim and slides it upright into a wire drying rack.",
+  "category": "Robot manipulation",
+  "short": "A gripper lifts a plate by its rim and sets it in a wire rack."
+ },
+ {
+  "name": "cup_unpacking",
+  "title": "Cup unpacking",
+  "about": "A gripper reaches into a box of 276 loose packing pieces, finds the mug buried inside and lifts it out.",
+  "category": "Robot manipulation",
+  "short": "A gripper digs a mug out of a box of 276 packing pieces."
+ },
+ {
+  "name": "viaduct_kit",
+  "title": "Viaduct kit",
+  "about": "A robot arm lifts the upper tier of a toy viaduct and seats it onto the keyed pegs of the lower tier.",
+  "category": "Robot manipulation",
+  "short": "A robot arm seats the top tier of a toy viaduct onto its pegs."
+ },
+ {
+  "name": "drawer_fork",
+  "title": "Drawer and fork",
+  "about": "The arm pulls an unpowered drawer open by its handle, then picks up a fork and places it in the drawer's tray.",
+  "category": "Robot manipulation",
+  "short": "Pull open a drawer, then put a fork in its tray."
+ },
+ {
+  "name": "toy_piano",
+  "title": "Toy piano",
+  "about": "A UR5e arm with a 20-joint Wuji hand plays Ode to Joy on a toy piano, then moves up an octave for a C major chord. Each key is a hinged body on a return spring between two stops, pressed by the fingers.",
+  "category": "Robot manipulation",
+  "short": "A robot hand plays Ode to Joy on a toy piano."
+ },
+ {
+  "name": "jenga",
+  "title": "Jenga",
+  "about": "The arm picks up a loose block and places it across the top of the tower, continuing the alternating pattern.",
+  "category": "Robot manipulation",
+  "short": "Lift a loose block and add it to the top of the tower."
+ },
+ {
+  "name": "balance_board",
+  "title": "Balance board",
+  "about": "A spring-loaded balance beam tips because one counterweight is missing; the arm puts it back and the beam levels out.",
+  "category": "Robot manipulation",
+  "short": "Restore balance by placing the missing counterweight."
+ },
+ {
+  "name": "toaster",
+  "title": "Toaster",
+  "about": "The arm turns a bread slice upright, drops it into the second slot and presses the lever; the spring-loaded carriage latches down.",
+  "category": "Robot manipulation",
+  "short": "Insert a slice of bread and press the toaster lever."
+ },
+ {
+  "name": "cereal",
+  "title": "Cereal",
+  "about": "The arm lifts an open carton of 168 letter-shaped cereal pieces, pours them into a bowl and sets the carton back down.",
+  "category": "Robot manipulation",
+  "short": "Pour 168 alphabet letters from a carton into a bowl."
+ },
+ {
+  "name": "box_turn",
+  "title": "Box turn",
+  "about": "Two arms hold a box between their fingertips only, flip it onto its side and then turn it a quarter turn.",
+  "category": "Robot manipulation",
+  "short": "Two arms pinch a box between their fingertips, flip it and turn it."
+ },
+ {
+  "name": "beer_pong",
+  "title": "Beer pong",
+  "about": "The arm picks up a ping-pong ball and throws it; it bounces once on the table and lands in the front cup.",
+  "category": "Robot manipulation",
+  "short": "Throw a ping-pong ball: one bounce, then into the cup."
+ },
+ {
+  "name": "wrecking_ball",
+  "title": "Wrecking ball",
+  "about": "A robot turns the crank of a toy crane; its chain-and-ball swings into a three-storey block building and knocks it down.",
+  "category": "Mechanisms",
+  "short": "A robot winds a crane whose swinging chain knocks down a building."
+ },
+ {
+  "name": "toy_well",
+  "title": "Toy well",
+  "about": "A robot turns the crank of a toy well; the drum winds up a flexible rope and lifts the bucket out.",
+  "category": "Mechanisms",
+  "short": "A robot turns a crank that winds a rope and lifts a bucket."
+ },
+ {
+  "name": "pelican_bicycle",
+  "title": "Pelican bicycle",
+  "about": "A robot slides a lever that controls how fast a wind-up pelican pedals its bicycle.",
+  "category": "Mechanisms",
+  "short": "A robot slides a lever that sets a pedalling pelican's speed."
+ },
+ {
+  "name": "toy_train",
+  "title": "Toy train",
+  "about": "The arm pushes a jointed toy train along a lane; its wheels spin freely as it rolls.",
+  "category": "Mechanisms",
+  "short": "Push a toy train along a track on its free-spinning wheels."
+ },
+ {
+  "name": "spinning_top",
+  "title": "Spinning top",
+  "about": "A motorised chuck grips the top's stem, spins it up and releases it; the top keeps spinning upright on its tip.",
+  "category": "Mechanisms",
+  "short": "A spinning chuck winds up a top and lets it go on its tip."
+ },
+ {
+  "name": "air_hockey",
+  "title": "Air hockey",
+  "about": "A robot arm with a mallet strikes a free puck across the table and into the far goal.",
+  "category": "Mechanisms",
+  "short": "A robot arm strikes a puck into the far goal."
+ },
+ {
+  "name": "trebuchet",
+  "title": "Trebuchet",
+  "about": "A falling counterweight swings the throwing arm; the boulder leaves the cup and smashes into a dry-stacked brick wall.",
+  "category": "Mechanisms",
+  "short": "A counterweight trebuchet hurls a boulder at a brick wall."
+ },
+ {
+  "name": "bolt_sweep",
+  "title": "Bolt sweep",
+  "about": "A robot drags a scraper across the table and sweeps 96 loose nuts, bolts and washers into a bin.",
+  "category": "Piles and granular",
+  "short": "A scraper sweeps 96 nuts, bolts and washers into a bin."
+ },
+ {
+  "name": "brick_pour",
+  "title": "Brick pour",
+  "about": "The arm tips a jar of studded toy bricks; they tumble out and slide down three collection chutes.",
+  "category": "Piles and granular",
+  "short": "Pour toy bricks from a jar down three chutes."
+ },
+ {
+  "name": "lava_fall",
+  "title": "Lava fall",
+  "about": "A small humanoid figure tips off its stand and sinks into a pot filled with 200 loose flame-shaped pieces.",
+  "category": "Piles and granular",
+  "short": "A toy robot falls backwards into a pot of 200 flame pieces."
+ },
+ {
+  "name": "dominoes",
+  "title": "Dominoes",
+  "about": "A spiral of 480 dominoes falls one after another, winding in to the center of an endless floor.",
+  "category": "Piles and granular",
+  "short": "480 dominoes topple one after another along a spiral."
+ },
+ {
+  "name": "sleeping",
+  "title": "Sleeping",
+  "about": "Short stacks of boxes settle and go to sleep, costing nothing; drag any box to wake it and its neighbours.",
+  "category": "Piles and granular",
+  "short": "36 boxes come to rest and stop being simulated; drag one to wake it."
+ },
+ {
+  "name": "overlap",
+  "title": "Overlapping boxes",
+  "about": "Twenty boxes start 15 mm inside one another. With the velocity cleanup pass they separate gently instead of flying apart.",
+  "category": "Piles and granular",
+  "short": "20 boxes start deep inside each other and separate gently."
+ },
+ {
+  "name": "card_house",
+  "title": "Card house",
+  "about": "A four-level house of cards: leaning pairs and flat cards on top, standing on friction alone.",
+  "category": "Piles and granular",
+  "short": "Four levels of playing cards held up by friction alone."
+ },
+ {
+  "name": "ratio_stack",
+  "title": "Mass-ratio stack",
+  "about": "Six cubes, each about three times heavier than the one beneath it. Momentum keeps the tower standing; switch it off and it topples within seconds.",
+  "category": "Piles and granular",
+  "short": "Six cubes, each three times heavier than the one below."
+ },
+ {
+  "name": "d6",
+  "title": "Six-axis joints",
+  "about": "Configurable joints: a motor-driven gantry carrying a pendulum, a universal joint that stops at its limit, and a free gimbal.",
+  "category": "Joints and articulations",
+  "short": "A driven gantry, a universal joint and a gimbal."
+ },
+ {
+  "name": "linkages",
+  "title": "Linkages",
+  "about": "Two pendulums copy the gold one's angle (reversed and halved), and a crank drives a closed four-bar linkage.",
+  "category": "Joints and articulations",
+  "short": "Copied joint motion and a closed four-bar linkage."
+ },
+ {
+  "name": "drives",
+  "title": "Joint motors",
+  "about": "Three arms are driven to the same target angle with torque limits of 3, 10 and 60 N\u00b7m and a speed limit of 2 rad/s.",
+  "category": "Joints and articulations",
+  "short": "Three arms driven to the same angle with different torque limits."
+ },
+ {
+  "name": "vel_limit",
+  "title": "Joint speed limits",
+  "about": "Two double pendulums swing from the same start. The grey one is free; the gold one's joints are limited to 1.5 rad/s.",
+  "category": "Joints and articulations",
+  "short": "Two double pendulums; the gold one has a speed limit."
+ },
+ {
+  "name": "load_friction",
+  "title": "Load-dependent friction",
+  "about": "Two loaded pendulums are released at 45\u00b0. The gold hinge's friction grows with the load it carries, so it holds still.",
+  "category": "Joints and articulations",
+  "short": "A hinge whose friction grows with load holds a heavy pendulum."
+ },
+ {
+  "name": "ragdoll",
+  "title": "Ragdoll",
+  "about": "A ten-part ragdoll with a free-floating torso is thrown onto a staircase and tumbles down.",
+  "category": "Joints and articulations",
+  "short": "A 10-part ragdoll tumbles down a staircase."
+ },
+ {
+  "name": "incline",
+  "title": "Incline",
+  "about": "A box and stacks of two and three rest on a 22\u00b0 slope. Friction anchors keep them from slowly creeping downhill.",
+  "category": "Friction",
+  "short": "A box and two stacks rest on a 22\u00b0 slope without sliding."
+ },
+ {
+  "name": "rods",
+  "title": "Sliding blocks",
+  "about": "Tall blocks are launched across a high-friction floor at 1 to 3 m/s; they slide, catch and tip over.",
+  "category": "Friction",
+  "short": "Tall blocks slide across a grippy floor and tip over."
+ },
+ {
+  "name": "spin_roll",
+  "title": "Spinning and rolling friction",
+  "about": "Balls are set spinning and rolling. With spinning and rolling friction the gold ones come to rest; the grey ones keep going.",
+  "category": "Friction",
+  "short": "The gold balls stop spinning and rolling; the grey ones keep going."
+ },
+ {
+  "name": "torsion",
+  "title": "Pinch grip",
+  "about": "Two pairs of round fingertips pinch a bar away from its centre. The gold pair resists twisting and holds it level; the grey bar swings down.",
+  "category": "Friction",
+  "short": "Fingertips pinch a bar off-centre; the gold pair holds it level."
+ },
+ {
+  "name": "dumbbells",
+  "title": "Dumbbells",
+  "about": "A rolling dumbbell and a spinning one gradually come to rest under rolling and spinning friction.",
+  "category": "Friction",
+  "short": "Rolling and spinning dumbbells come to rest."
+ },
+ {
+  "name": "bounce",
+  "title": "Bounce",
+  "about": "Balls drop onto pads with bounciness from 0 (dead) to 0.9, left to right.",
+  "category": "Contact response",
+  "short": "Balls bounce on pads from dead to very bouncy."
+ },
+ {
+  "name": "compliance",
+  "title": "Soft contacts",
+  "about": "Three 1 kg blocks land on contacts of different stiffness and settle about 10, 1 and 0.1 mm into the ground.",
+  "category": "Contact response",
+  "short": "Blocks sink into soft, medium and firm contacts."
+ },
+ {
+  "name": "body_limits",
+  "title": "Speed caps",
+  "about": "Gold versus grey: a 1 m/s fall-speed cap, a 5 rad/s spin cap, and spin damping on otherwise frictionless spinners.",
+  "category": "Bodies and worlds",
+  "short": "Gold bodies have a fall-speed cap, a spin cap and spin damping."
+ },
+ {
+  "name": "kinematic",
+  "title": "Kinematic paddle",
+  "about": "A paddle moving on a prescribed path sweeps boxes aside; the gold box above floats because its gravity is switched off.",
+  "category": "Bodies and worlds",
+  "short": "A paddle on a fixed path sweeps boxes; one box ignores gravity."
+ },
+ {
+  "name": "worlds",
+  "title": "Parallel worlds",
+  "about": "Sixteen independent worlds run side by side in one simulation, each a pendulum released from a different angle into a tower.",
+  "category": "Bodies and worlds",
+  "short": "16 independent worlds simulated together in one step."
+ }
+]

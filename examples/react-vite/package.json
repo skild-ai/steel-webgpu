@@ -1,0 +1,26 @@
+{
+  "name": "@steel-webgpu/example-react-vite",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev --port 5302",
+    "build": "vp build",
+    "preview": "vp preview --port 5302",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@steel-webgpu/react": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "steel-webgpu": "workspace:*",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.187.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "@webgpu/types": "0.1.74"
+  }
+}

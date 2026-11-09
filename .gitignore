@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+# Local tooling: debug pages, probes, Newton recordings, editor/agent config.
+debug/
+.claude/
+node_modules/
+dist/
+.next/
+next-env.d.ts

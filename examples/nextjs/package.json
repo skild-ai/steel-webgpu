@@ -1,0 +1,27 @@
+{
+  "name": "@steel-webgpu/example-nextjs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 5303",
+    "build": "next build",
+    "start": "next start --port 5303",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@steel-webgpu/react": "workspace:*",
+    "next": "16.4.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "steel-webgpu": "workspace:*",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.187.0",
+    "@webgpu/types": "0.1.74"
+  }
+}

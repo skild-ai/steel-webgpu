@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Steel WebGPU</title>
+  </head>
+  <body>
+    <canvas id="view"></canvas>
+    <div id="hud" hidden>
+      <div class="head">
+        <h1 id="title">Steel WebGPU</h1>
+        <button id="fold" class="fold" type="button" aria-label="Hide panel" title="Hide panel">▾</button>
+      </div>
+      <div class="body">
+        <div class="row"><span>sim time</span><span class="value" data-stat="time">0</span></div>
+        <div class="row"><span>display fps</span><span class="value" data-stat="fps">-</span></div>
+        <div class="row"><span>real-time factor</span><span class="value" data-stat="rtf">-</span></div>
+        <div class="row"><span>physics GPU / frame</span><span class="value" data-stat="gpu">-</span></div>
+        <div class="row"><span>contacts</span><span class="value" data-stat="contacts">-</span></div>
+        <div class="row"><span>scene load</span><span class="value" data-stat="load">-</span></div>
+        <div id="metric-row" class="row" hidden><span id="metric-label"></span><span class="value" data-stat="metric">-</span></div>
+        <div class="muted">Drag any loose object to pull it; scroll while dragging to change depth.</div>
+        <select id="scene" aria-label="Scene"></select>
+        <div id="about" class="muted"></div>
+        <label id="compare" class="toggle" hidden><input type="checkbox" aria-label="compare" /> <span></span></label>
+        <div class="solver">
+          <label
+            >substeps
+            <select id="substeps" aria-label="substeps"></select
+          ></label>
+          <label
+            >iterations
+            <select id="iterations" aria-label="iterations"></select
+          ></label>
+          <label class="toggle"><input id="sleeping" type="checkbox" aria-label="sleeping" /> sleeping</label>
+          <label class="toggle"><input id="momentum" type="checkbox" aria-label="momentum" /> momentum</label>
+          <label class="toggle"><input id="collision" type="checkbox" aria-label="collision" /> collision</label>
+        </div>
+        <button id="menu" type="button">Menu</button>
+        <button id="play" type="button">Pause</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
+    </div>
+    <div id="overlay" hidden></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

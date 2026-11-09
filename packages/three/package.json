@@ -1,0 +1,42 @@
+{
+  "name": "@steel-webgpu/three",
+  "version": "0.4.0",
+  "description": "three.js WebGPU binding for steel-webgpu: GPU-placed scene graph, studio look, picking and drag",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/skild-ai/steel-webgpu.git",
+    "directory": "packages/three"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "steel-webgpu": "workspace:*",
+    "typegpu": "0.12.9"
+  },
+  "devDependencies": {
+    "@types/three": "0.187.0",
+    "@webgpu/types": "0.1.74",
+    "three": "0.187.0"
+  },
+  "peerDependencies": {
+    "three": ">=0.187.0"
+  }
+}

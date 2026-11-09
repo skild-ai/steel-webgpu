@@ -1,0 +1,20 @@
+{
+  "name": "@steel-webgpu/example-vanilla-three",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev --port 5301",
+    "build": "vp build",
+    "preview": "vp preview --port 5301",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@steel-webgpu/three": "workspace:*",
+    "steel-webgpu": "workspace:*",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.187.0",
+    "@webgpu/types": "0.1.74"
+  }
+}
