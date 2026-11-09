@@ -35,6 +35,13 @@
   "short": "A robot hand plays Ode to Joy on a toy piano."
  },
  {
+  "name": "hand_stairs",
+  "title": "Hand on the stairs",
+  "about": "A 20-joint Wuji hand with no arm behind it walks up a spiral staircase on its fingertips. One finger steps at a time while the palm leans over the four left standing.",
+  "category": "Robot manipulation",
+  "short": "A robot hand climbs a spiral staircase on its fingertips."
+ },
+ {
   "name": "jenga",
   "title": "Jenga",
   "about": "The arm picks up a loose block and places it across the top of the tower, continuing the alternating pattern.",
