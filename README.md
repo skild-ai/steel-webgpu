@@ -46,4 +46,4 @@ cd apps/viewer && bun run dev   # the scene viewer on http://localhost:5199/?dem
 
 ## License
 
-Apache-2.0, with a BSD-3-Clause robot model; see [LICENSE.md](LICENSE.md).
+Apache-2.0. The bundled robot models keep their own BSD-3-Clause and MIT licenses; see [LICENSE.md](LICENSE.md).
