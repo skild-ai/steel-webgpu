@@ -49,6 +49,8 @@ for k in ("toaster", "kit", "drawer", "stack", "lift", "sort"):
     SOLVER_OPTIONS.setdefault(k, {})["enable_sleeping"] = True
 # Standalone runners: they ignore phase_delay and interpolate targets at every substep.
 NO_PHASE_DELAY = ("toaster", "cereal")
+# The beer pong throw was tuned with targets held per frame; smooth targets throw it ~7% farther.
+TARGETS_HELD = ("beer_pong",)
 
 
 def interpolate(waypoints, t, smooth=True):
@@ -183,6 +185,7 @@ def main(montage, assets_path, station, out, replay=None):
                 **SOLVER_OPTIONS.get(kind, {})},
         targets=targets,
         driven=driven,
+        targets_held=kind in TARGETS_HELD,
         integral_count=int(info.get("integral_drive_count", 0)),
         info=meta,
     )

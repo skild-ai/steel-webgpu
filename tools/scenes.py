@@ -119,20 +119,33 @@ def ragdoll():
     torso = b.add_link(xform=tf(start, wp.quat_rpy(0.4, 0.5, 0.0)))
     b.add_shape_capsule(torso, radius=0.07, half_height=0.12, cfg=body_cfg, color=BLUE)
     joints = [b.add_joint_free(torso)]
+    # Neck, shoulders and hips are D6 rotations with anatomical limits (a ball joint has none), and every joint
+    # has a little damping, so a dragged or tumbling figure's limbs cannot whirl.
+    damp = 0.02
+    D = newton.ModelBuilder.JointDofConfig
+
+    def rotations(x, y, z):
+        return [D(axis=a, limit_lower=-lim[0], limit_upper=lim[1], damping=damp) for a, lim in zip(((1, 0, 0), (0, 1, 0), (0, 0, 1)), (x, y, z))]
+
     head = b.add_link(xform=tf(start + (0, 0, 0.29)))
     b.add_shape_sphere(head, radius=0.08, cfg=body_cfg, color=GOLD)
-    joints.append(b.add_joint_ball(torso, head, parent_xform=tf((0, 0, 0.2)), child_xform=tf((0, 0, -0.09))))
-    limbs = [((0.0, 0.16, 0.17), (1, 0, 0)), ((0.0, -0.16, 0.17), (1, 0, 0)), ((0.0, 0.06, -0.2), (0, 1, 0)), ((0.0, -0.06, -0.2), (0, 1, 0))]
-    for anchor, axis in limbs:
+    joints.append(b.add_joint_d6(torso, head, parent_xform=tf((0, 0, 0.2)), child_xform=tf((0, 0, -0.09)),
+                                 angular_axes=rotations((0.5, 0.5), (0.5, 0.5), (0.7, 0.7))))
+    shoulder = ((1.5, 1.5), (1.5, 1.5), (0.8, 0.8))
+    hip = ((0.6, 0.6), (1.2, 1.2), (0.5, 0.5))
+    limbs = [((0.0, 0.16, 0.17), (1, 0, 0), shoulder), ((0.0, -0.16, 0.17), (1, 0, 0), shoulder),
+             ((0.0, 0.06, -0.2), (0, 1, 0), hip), ((0.0, -0.06, -0.2), (0, 1, 0), hip)]
+    for anchor, axis, lims in limbs:
         down = -0.12
         upper = b.add_link(xform=tf(start + anchor + (0, 0, down)))
         b.add_shape_capsule(upper, radius=0.035, half_height=0.08, cfg=body_cfg, color=TEAL)
-        joints.append(b.add_joint_ball(torso, upper, parent_xform=tf(anchor), child_xform=tf((0, 0, 0.12))))
+        joints.append(b.add_joint_d6(torso, upper, parent_xform=tf(anchor), child_xform=tf((0, 0, 0.12)),
+                                     angular_axes=rotations(*lims)))
         lower = b.add_link(xform=tf(start + anchor + (0, 0, 2 * down)))
         b.add_shape_capsule(lower, radius=0.03, half_height=0.08, cfg=body_cfg, color=TEAL)
         joints.append(
             b.add_joint_revolute(upper, lower, parent_xform=tf((0, 0, -0.12)), child_xform=tf((0, 0, 0.12)), axis=axis,
-                                 limit_lower=-2.2, limit_upper=0.0)
+                                 limit_lower=-2.2, limit_upper=0.0, damping=damp)
         )
     b.add_articulation(joints)
     return b, {torso: (2.0, 0, 0.3, 0, 4.0, 0)}, "Floating base: a 10-body ragdoll with a free-floating torso is thrown onto a staircase."

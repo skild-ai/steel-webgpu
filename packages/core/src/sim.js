@@ -454,7 +454,7 @@ export class Sim {
       A[k] = ao; ao += Math.max(n, 1);
     }
     this.C = {
-      NEST: nest ? 1 : 0, MO, NB, NBP: Math.max(NB, 1), NBP2: Math.max(NB, 1) * 2, NCOLW: ncolw, NCOL: ncolw * 32, NS, NA, NAP: Math.max(NA, 1), NL, ND, NDP: Math.max(ND, 1),
+      TGT_HELD: S.targets_held ? 1 : 0, NEST: nest ? 1 : 0, MO, NB, NBP: Math.max(NB, 1), NBP2: Math.max(NB, 1) * 2, NCOLW: ncolw, NCOL: ncolw * 32, NS, NA, NAP: Math.max(NA, 1), NL, ND, NDP: Math.max(ND, 1),
       NLOOP: loops.length, NMIMIC: mimics.length, CTRL_KIND: ctrlKind, CTRL_A: ctrlA, CTRL_B: ctrlB,
       NLP: Math.max(NL, 1), NDA, JDIM: 3 * NDA, MAXDENSE, DHDR, DPS, MAXP, MAXC, MAXU, UH, WH, ROWS, PO, FMO, FMODE: fmode, PATCH: anchorBeta > 0 ? 1 : 0, F_ANCHOR_BETA: anchorBeta,
       EXTRA: anchorBeta > 0 || SV.contact_friction_shared_anchor ? 1 : 0, SHARED: SV.contact_shared_anchor ? 1 : 0, FSHARED: SV.contact_friction_shared_anchor ? 1 : 0,

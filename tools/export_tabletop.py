@@ -32,7 +32,7 @@ from newton_export import export_model  # noqa: E402
 # Regularization stops single bolts rocking in the settled bin.
 SOLVER = {
     "bolt_sweep": {"iterations": 8, "contact_warmstart": True, "nesterov_momentum": True, "contact_regularization": 0.01},
-    "cup_unpacking": {"iterations": 6, "contact_warmstart": True, "friction_anchor_beta": 0.2, "contact_regularization": 0.01, "enable_sleeping": True},
+    "cup_unpacking": {"substeps": 2, "iterations": 8, "contact_warmstart": True, "friction_anchor_beta": 0.2, "contact_regularization": 0.01, "enable_sleeping": True},
     "plate_rack": {"friction_anchor_beta": 0.2},
     "toy_well": {"substeps": 2, "iterations": 12, "contact_warmstart": True},
     "wrecking_ball": {"substeps": 3, "iterations": 12},

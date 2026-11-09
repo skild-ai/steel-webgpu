@@ -1797,10 +1797,13 @@ fn main(@builtin(local_invocation_index) tid: u32) {
   if (tid == 0u) { atomicStore(&sched[S_META + 3u], 0u); }
   if (SLEEP == 1u) { sleep_islands(tid); }
   storageBarrier(); workgroupBarrier();
-  // Baked targets (60 Hz samples), interpolated at every substep's start time so the drives see a smooth
-  // path at any substep count instead of a step per frame.
+  // Baked targets (60 Hz samples), interpolated at every substep so the drives see a smooth path at any substep
+  // count instead of a step per frame. Sampled at the substep's midpoint half a frame back, so each frame's
+  // substeps average to that frame's sample: the timing of a target held per frame, as Newton applies it.
+  // TGT_HELD scenes hold each frame's sample, for paths tuned against that (a ballistic throw).
   if (tid < P.driven) {
-    let frame = clamp((P.phase + f32(P.substep) * P.dt) * 60.0, 0.0, f32(P.path_frames - 1u));
+    let ramp = (P.phase + (f32(P.substep) + 0.5) * P.dt) * 60.0 - 0.5;
+    let frame = clamp(select(ramp, P.phase * 60.0, TGT_HELD == 1u), 0.0, f32(P.path_frames - 1u));
     let a = u32(frame);
     let b = min(a + 1u, P.path_frames - 1u);
     let pa = statF[SF_PATH + (a * P.driven + tid) / 4u][(a * P.driven + tid) % 4u];
