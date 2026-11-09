@@ -84,14 +84,16 @@ def shape_points(model, s):
 
 def export_model(
     model, out, *, name, solver=None, targets=None, driven=0, integral_count=0, control=None, info=None, twists=None,
-    targets_held=False,
+    targets_held=False, driven_dofs=None, target_loop=None, target_velocity=False,
 ):
     """Write ``scene.json`` and ``scene.bin`` for ``model`` into ``out``.
 
     ``twists`` (bodies x 6: COM linear velocity, angular velocity, world) sets initial free-body
     velocities. ``targets`` (frames x driven, 60 Hz) optionally drives the first ``driven`` dofs of the
     first articulation (interpolated per substep, or held per frame with ``targets_held`` for paths tuned
-    against held targets);
+    against held targets), or the Newton dofs listed in ``driven_dofs`` (scalar joints, anywhere in the
+    model). Past its last frame the table holds, or replays from frame ``target_loop``; with
+    ``target_velocity`` the velocity target follows the table's slope.
     ``control`` names a per-substep controller; ``info`` is free-form
     scene metadata kept in the JSON.
     """
@@ -275,7 +277,7 @@ def export_model(
         {tuple(sorted((index[a], index[c]))) for a, c in model.shape_collision_filter_pairs if a in index and c in index}
     )
     scene = {
-        "gravity": [0.0, 0.0, -9.81],
+        "gravity": [round(float(g), 6) for g in model.gravity.numpy().reshape(-1, 3)[0]] if getattr(model, "gravity", None) is not None else [0.0, 0.0, -9.81],
         "fps": 60,
         "substeps": solver["substeps"],
         "iterations": solver["iterations"],
@@ -296,6 +298,9 @@ def export_model(
         "target_frames": targets.shape[0],
         "driven": driven,
         "targets_held": bool(targets_held),
+        **({"driven_dofs": [int(d) for d in driven_dofs]} if driven_dofs is not None else {}),
+        **({"target_loop": int(target_loop)} if target_loop is not None else {}),
+        **({"target_velocity": True} if target_velocity else {}),
         "integral_count": int(integral_count),
         "demo": name,
         "control": control,

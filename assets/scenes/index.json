@@ -285,5 +285,40 @@
   "about": "A paddle moving on a prescribed path sweeps boxes aside; the gold box above floats because its gravity is switched off.",
   "category": "Bodies",
   "short": "A paddle on a fixed path sweeps boxes; one box ignores gravity."
+ },
+ {
+  "name": "loop_stewart_platform",
+  "title": "Stewart platform",
+  "about": "A 6-UPS hexapod: six prismatic legs carry a 2 kg platform through heave, roll, pitch and yaw. Five spatial loops share the platform, closed by ball joints.",
+  "category": "Mechanisms",
+  "short": "Six driven legs tilt and lift a platform through five closed loops."
+ },
+ {
+  "name": "loop_delta_robot",
+  "title": "Delta robot",
+  "about": "Three driven upper arms carry a platform through parallelogram forearms; the shoulders trace phase-shifted sines, so the platform circles while it rises and falls. Five loops, closed by ball joints.",
+  "category": "Mechanisms",
+  "short": "Three driven arms circle a delta robot's platform."
+ },
+ {
+  "name": "loop_parallel_gripper",
+  "title": "Parallel gripper",
+  "about": "A prismatic actuator swings two parallelogram fingers through connecting rods, so the jaws close and open every 2 s while staying vertical. Four loops, closed by revolute joints.",
+  "category": "Mechanisms",
+  "short": "One actuator closes two parallelogram jaws."
+ },
+ {
+  "name": "loop_hoberman_sphere",
+  "title": "Hoberman sphere",
+  "about": "A Hoberman sphere of 120 bars in zero gravity: one driven hub opens it from a scissor angle of 120 to 30 degrees and closes it again every 4 s. 91 revolute loop closures in one articulation.",
+  "category": "Mechanisms",
+  "short": "One driven hinge opens and closes a 120-bar sphere."
+ },
+ {
+  "name": "dr_legs_walk",
+  "title": "DR legs walk",
+  "about": "The DR legs biped walks a 22.4 s clip on its servos. Each leg has a four-bar in its chain and a spatial ankle loop, six revolute loop closures in all.",
+  "category": "Mechanisms",
+  "short": "A biped with closed-loop legs walks on its servos."
  }
 ]

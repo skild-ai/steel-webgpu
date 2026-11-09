@@ -1348,19 +1348,30 @@ fn pre_twist(b: i32) -> array<vec3f, 2> {
 }
 
 // Bilateral dense block: nb unclamped rows of J (rows 0..nb-1), their Y = H^-1 J^T and rhs.
-fn put_bilateral(o: u32, art_id: u32, J: ptr<function, array<f32, JDIM>>, nb: u32, rhs: vec3f) {
+// unit (loop closures, as Steel's connect rows): each row scaled to unit norm, with the CFM on its diagonal; a row
+// (near) redundant with the tree, |J|^2 <= 1e-8, stays inert. Unscaled, such a row's float noise over a tiny
+// diagonal turns into large velocities (a hinge closure whose axis is already fixed by the tree).
+fn put_bilateral(o: u32, art_id: u32, J: ptr<function, array<f32, JDIM>>, nb: u32, rhs_in: vec3f, unit: bool) {
   let ai = art_info(art_id);
+  var rhs = rhs_in;
   for (var r = 0u; r < nb; r++) {
+    var sc = 1.0;
+    if (unit) {
+      var n2 = 0.0;
+      for (var k = 0u; k < ai.w; k++) { n2 += (*J)[r * NDA + k] * (*J)[r * NDA + k]; }
+      sc = select(0.0, inverseSqrt(n2), n2 > 1e-8);
+      rhs[r] *= sc;
+    }
     var tau: array<f32, NDA>; var y: array<f32, NDA>;
-    for (var k = 0u; k < NDA; k++) { tau[k] = select(0.0, (*J)[r * NDA + k], k < ai.w); y[k] = 0.0; }
+    for (var k = 0u; k < NDA; k++) { tau[k] = select(0.0, (*J)[r * NDA + k] * sc, k < ai.w); y[k] = 0.0; }
     art_solve_gen(art_id, &tau, &y);
     var kk = 0.0;
     for (var k = 0u; k < ai.w; k++) {
-      art[o + DHDR + r * NDA + k] = (*J)[r * NDA + k];
+      art[o + DHDR + r * NDA + k] = tau[k];
       art[o + DHDR + 3u * NDA + r * NDA + k] = y[k];
-      kk += (*J)[r * NDA + k] * y[k];
+      kk += tau[k] * y[k];
     }
-    art[o + 5u + r] = select(0.0, 1.0 / kk, kk > 1e-12);
+    art[o + 5u + r] = select(0.0, 1.0 / (kk + select(0.0, F_CFM, unit)), kk > 1e-12);
   }
   art[o] = f32(art_id); art[o + 1u] = 0.0; art[o + 2u] = 0.0;
   art[o + 4u] = rhs.x; art[o + 22u] = rhs.y; art[o + 23u] = rhs.z;
@@ -1800,23 +1811,31 @@ fn main(@builtin(local_invocation_index) tid: u32) {
   // Baked targets (60 Hz samples), interpolated at every substep so the drives see a smooth path at any substep
   // count instead of a step per frame. Sampled at the substep's midpoint half a frame back, so each frame's
   // substeps average to that frame's sample: the timing of a target held per frame, as Newton applies it.
-  // TGT_HELD scenes hold each frame's sample, for paths tuned against that (a ballistic throw).
+  // TGT_HELD scenes hold each frame's sample, for paths tuned against that (a ballistic throw). Past the last
+  // frame the table holds, or (TGT_WRAP) replays from frame TGT_LOOP, the start of its periodic part. With
+  // TGT_VEL the velocity target is the table's slope.
   if (tid < P.driven) {
+    let last = f32(P.path_frames - 1u);
     let ramp = (P.phase + (f32(P.substep) + 0.5) * P.dt) * 60.0 - 0.5;
-    let frame = clamp(select(ramp, P.phase * 60.0, TGT_HELD == 1u), 0.0, f32(P.path_frames - 1u));
+    var frame = select(ramp, P.phase * 60.0, TGT_HELD == 1u);
+    if (TGT_WRAP == 1u && frame > last) { frame = f32(TGT_LOOP) + (frame - f32(TGT_LOOP)) % (last - f32(TGT_LOOP)); }
+    frame = clamp(frame, 0.0, last);
     let a = u32(frame);
     let b = min(a + 1u, P.path_frames - 1u);
     let pa = statF[SF_PATH + (a * P.driven + tid) / 4u][(a * P.driven + tid) % 4u];
     let pb = statF[SF_PATH + (b * P.driven + tid) / 4u][(b * P.driven + tid) % 4u];
     var value = mix(pa, pb, frame - f32(a));
+    let d = statU[SU_DRV + tid * 2u];
     if (tid < P.integral_count) {
+      let qc = statU[SU_DRV + tid * 2u + 1u];
       if (P.substep == 0u) {
-        let err = clamp(value - art[A_Q + tid], -0.08, 0.08);
-        art[A_INT + tid] = clamp(art[A_INT + tid] + 3.0 * P.frame_dt * err, -0.12, 0.12);
+        let err = clamp(value - art[A_Q + qc], -0.08, 0.08);
+        art[A_INT + d] = clamp(art[A_INT + d] + 3.0 * P.frame_dt * err, -0.12, 0.12);
       }
-      value += art[A_INT + tid];
+      value += art[A_INT + d];
     }
-    art[A_TGT + tid] = value;
+    art[A_TGT + d] = value;
+    if (TGT_VEL == 1u) { art[A_TGTV + d] = (pb - pa) * 60.0; }
   }
   // Demo controllers (update_control), every substep.
   if (CTRL_KIND == 1u && tid == 0u) {
@@ -2463,7 +2482,7 @@ fn main(@builtin(local_invocation_index) tid: u32) {
     let ex = vec3f(1.0, 0.0, 0.0); let ey = vec3f(0.0, 1.0, 0.0); let ez = vec3f(0.0, 0.0, 1.0);
     add_gen_jac(cl, pm, 1.0, ex, ey, ez, ai.z, &J);
     if (pl >= 0) { add_gen_jac(u32(pl), pm, -1.0, ex, ey, ez, ai.z, &J); }
-    put_bilateral(A_DENSE + slot * DPS, art_id, &J, 3u, P.beta * (pc - pa) / P.dt);
+    put_bilateral(A_DENSE + slot * DPS, art_id, &J, 3u, P.beta * (pc - pa) / P.dt, true);
     if (revolute) {
       let ap = qrot(rp, statF[SF_LOOP + i * 5u + 3u].xyz);
       let ac = qrot(rc, statF[SF_LOOP + i * 5u + 4u].xyz);
@@ -2476,7 +2495,7 @@ fn main(@builtin(local_invocation_index) tid: u32) {
       add_gen_ang(cl, 1.0, e1, e2, ai.z, &Ja);
       if (pl >= 0) { add_gen_ang(u32(pl), -1.0, e1, e2, ai.z, &Ja); }
       let err = cross(ap, ac);
-      put_bilateral(A_DENSE + (slot + 1u) * DPS, art_id, &Ja, 2u, P.beta * vec3f(dot(e1, err), dot(e2, err), 0.0) / P.dt);
+      put_bilateral(A_DENSE + (slot + 1u) * DPS, art_id, &Ja, 2u, P.beta * vec3f(dot(e1, err), dot(e2, err), 0.0) / P.dt, true);
     }
   }
   // Mimic rows: qd_follower - c1 * qd_leader, Baumgarte on q_follower - c1 * q_leader - c0.
@@ -2488,7 +2507,7 @@ fn main(@builtin(local_invocation_index) tid: u32) {
     for (var k = 0u; k < JDIM; k++) { J[k] = 0.0; }
     J[u32(M0.y)] = 1.0; J[u32(M0.z)] -= M0.w;
     let phi = art[A_Q + u32(M1.x)] - M0.w * art[A_Q + u32(M1.y)] - M1.z;
-    put_bilateral(A_DENSE + slot * DPS, u32(M0.x), &J, 1u, vec3f(P.beta * phi / P.dt, 0.0, 0.0));
+    put_bilateral(A_DENSE + slot * DPS, u32(M0.x), &J, 1u, vec3f(P.beta * phi / P.dt, 0.0, 0.0), false);
   }
 
 }
