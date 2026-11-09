@@ -33,6 +33,7 @@ PAD_TORSION_RADIUS = {"toaster": 0.01}
 # Bodies laid out in a lattice that a low-iteration solve cannot hold (cereal letters 21 layers deep
 # nest into each other and pop out); they start from the pile they settle into.
 SETTLE = {"cereal": ("cereal_pieces", "tracked_body")}
+SOLVER_OPTIONS["cereal"]["contact_regularization"] = 0.01
 # The montage's own runner keeps friction anchors off for the lava pile; regularization calms the settled pile.
 SOLVER_OPTIONS["lava_fall"] = {"friction_anchor_beta": 0.0, "contact_regularization": 0.01}
 # Warm start where it lets the task pass in half the sweeps.
@@ -40,6 +41,9 @@ for k in ("drawer", "lift", "stack"):
     SOLVER_OPTIONS[k] = {"contact_warmstart": True}
 # The jenga tower rocks at rest without regularization; 0.005 brings it to rest at 2x16, cheaper than 4x8.
 SOLVER_OPTIONS["stack"]["contact_regularization"] = 0.005
+# The drawer's spoon rocks across its curved bowl without rolling resistance; Steel's torsional and rolling
+# friction (which needs friction anchors off) lets it come to rest.
+SOLVER_OPTIONS["drawer"].update(enable_torsional_rolling_friction=True, friction_anchor_beta=0.0)
 # Sleeping where the scene comes to rest and it was validated: faster, and the task still passes.
 for k in ("toaster", "kit", "drawer", "stack", "lift", "sort"):
     SOLVER_OPTIONS.setdefault(k, {})["enable_sleeping"] = True
@@ -180,7 +184,6 @@ def main(montage, assets_path, station, out, replay=None):
         targets=targets,
         driven=driven,
         integral_count=int(info.get("integral_drive_count", 0)),
-        targets_per_substep=kind in NO_PHASE_DELAY,
         info=meta,
     )
     radius = PAD_TORSION_RADIUS.get(kind)

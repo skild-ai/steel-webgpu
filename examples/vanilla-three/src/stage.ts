@@ -37,7 +37,7 @@ export class Stage {
     orbit.target.set(...world.view.target);
     orbit.maxPolarAngle = MAX_POLAR_ANGLE;
     orbit.update();
-    // DragPull listens first, so a grab on a loose body stops the orbit before it starts.
+    // DragPull listens first, so a grab on a body stops the orbit before it starts.
     this.drag = new DragPull(this.canvas, this.camera, world.graph, world, orbit);
     orbit.connect(this.canvas);
     this.orbit = orbit;

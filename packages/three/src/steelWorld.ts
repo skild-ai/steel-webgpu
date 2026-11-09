@@ -8,7 +8,6 @@ import { SceneGraph } from './sceneGraph';
 import { DEFAULT_CAMERA } from './scenePreviewer';
 import { sceneLoader } from './sceneLoader';
 
-const LOOSE_BODY = 1;
 
 export type StepCallback = (sim: Sim) => void;
 
@@ -149,8 +148,8 @@ export class SteelWorld implements PullTarget {
     return this.latestPoses;
   }
 
-  isLoose(body: number) {
-    return this.current.bodyKind[body] === LOOSE_BODY;
+  isDraggable(body: number) {
+    return this.current.draggable[body] ?? false;
   }
 
   refreshPoses() {

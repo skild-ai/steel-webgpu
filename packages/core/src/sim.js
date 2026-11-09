@@ -172,6 +172,10 @@ export class Sim {
     (S.mimics ?? []).forEach((m) => { if (m.enabled) addMimic(m.follower, m.leader, m.c0, m.c1); });
     this.NB = NB; this.NA = NA; this.NL = NL; this.ND = ND;
     this.bodyKind = bodyKind;
+    // Bodies the mouse spring may pull: free bodies and the movable links of articulations without drives
+    // (robots follow their targets); never kinematic bodies.
+    const driven = arts.map((a) => dofs.slice(a.dofStart, a.dofStart + a.dofCount).some((d) => d.ke > 0 || d.kd > 0));
+    this.draggable = bodyKind.map((k, b) => !S.bodies.kinematic?.[b] && (k === 1 || (k === 2 && links[bodyLink[b]].movable && !driven[bodyArt[b]])));
 
     // Hulls.
     const hullIndex = new Map();
@@ -450,7 +454,7 @@ export class Sim {
       A[k] = ao; ao += Math.max(n, 1);
     }
     this.C = {
-      TGT_SUB: S.targets_per_substep ? 1 : 0, NEST: nest ? 1 : 0, MO, NB, NBP: Math.max(NB, 1), NBP2: Math.max(NB, 1) * 2, NCOLW: ncolw, NCOL: ncolw * 32, NS, NA, NAP: Math.max(NA, 1), NL, ND, NDP: Math.max(ND, 1),
+      NEST: nest ? 1 : 0, MO, NB, NBP: Math.max(NB, 1), NBP2: Math.max(NB, 1) * 2, NCOLW: ncolw, NCOL: ncolw * 32, NS, NA, NAP: Math.max(NA, 1), NL, ND, NDP: Math.max(ND, 1),
       NLOOP: loops.length, NMIMIC: mimics.length, CTRL_KIND: ctrlKind, CTRL_A: ctrlA, CTRL_B: ctrlB,
       NLP: Math.max(NL, 1), NDA, JDIM: 3 * NDA, MAXDENSE, DHDR, DPS, MAXP, MAXC, MAXU, UH, WH, ROWS, PO, FMO, FMODE: fmode, PATCH: anchorBeta > 0 ? 1 : 0, F_ANCHOR_BETA: anchorBeta,
       EXTRA: anchorBeta > 0 || SV.contact_friction_shared_anchor ? 1 : 0, SHARED: SV.contact_shared_anchor ? 1 : 0, FSHARED: SV.contact_friction_shared_anchor ? 1 : 0,

@@ -256,6 +256,23 @@ fn art_factor(a: u32) {
     if ((u32(statF[SF_BODY + u32(b) * 8u + 7u].w) & 2u) != 0u) { pa0 = sadd(pa0, SV(vec3f(0.0), m * g)); }
     // Applied wrench (State.body_f) at the link COM.
     pa0 = sadd(pa0, SV(-ld3(A_BF + u32(b) * 8u + 4u), -ld3(A_BF + u32(b) * 8u)));
+    // Mouse spring on a grabbed link: the free body's point spring (5 Hz, at most ~6 g) as a force at the grab
+    // point; the rest of the articulation only adds mass, so the link follows more softly than a free body.
+    if (P.pick_target.w > 0.5 && u32(P.pick_local.w) == u32(b)) {
+      let lq = link_rot(l);
+      let r = qrot(lq, P.pick_local.xyz);
+      let x = ld3(L + L_COM) + r;
+      let wn = 2.0 * 3.14159265 * 5.0;
+      var acc = wn * wn * (P.pick_target.xyz - x) - 2.0 * wn * (v.l + cross(v.a, r));
+      if (length(acc) > 60.0) { acc *= 60.0 / length(acc); }
+      let Iinv = R * body_inv_inertia(b) * transpose(R);
+      let S = mat3x3f(vec3f(0.0, r.z, -r.y), vec3f(-r.z, 0.0, r.x), vec3f(r.y, -r.x, 0.0));
+      let im = body_inv_mass(b);
+      let K = mat3x3f(vec3f(im, 0.0, 0.0), vec3f(0.0, im, 0.0), vec3f(0.0, 0.0, im)) - S * Iinv * S;
+      let c0 = cross(K[1], K[2]); let c1 = cross(K[2], K[0]); let c2 = cross(K[0], K[1]);
+      let F = transpose(mat3x3f(c0, c1, c2)) * acc / dot(K[0], c0);
+      pa0 = sadd(pa0, SV(-cross(r, F), -F));
+    }
     stsv(L + L_PA, pa0);
   }
   for (var kk = 0u; kk < ai.y; kk++) {
@@ -284,12 +301,17 @@ fn art_factor(a: u32) {
       if (DRIVE_ROWS == 0u && (dr.y > 0.0 || dr.z > 0.0)) {
         let q = art[A_Q + link_qs(l) + r]; let qd = art[A_QD + d];
         let err = art[A_TGT + d] - q;
-        let te = dr.y * err + dr.z * (art[A_TGTV + d] - qd);
-        if (abs(te) <= dr.w || dr.w <= 0.0) {
+        let tv = art[A_TGTV + d];
+        // Saturate on the torque the implicit step applies (this dof's effective inertia m), not the explicit PD
+        // torque: a stiff gain on a light joint overstates it, and the drive chatters between +-effort.
+        let m = max(D[r * JM + r], 1e-9);
+        let qdn = (m * qd + P.dt * (dr.y * err + dr.z * tv)) / (m + P.dt * dr.z + P.dt * P.dt * dr.y);
+        let ti = dr.y * (err - P.dt * qdn) + dr.z * (tv - qdn);
+        if (abs(ti) <= dr.w || dr.w <= 0.0) {
           D[r * JM + r] += P.dt * P.dt * dr.y + P.dt * dr.z;
-          tau += dr.y * err - P.dt * dr.y * qd + dr.z * (art[A_TGTV + d] - qd);
+          tau += dr.y * err - P.dt * dr.y * qd + dr.z * (tv - qd);
         } else {
-          tau += clamp(te, -dr.w, dr.w);
+          tau += clamp(ti, -dr.w, dr.w);
         }
       }
       u[r] = tau - sdot(ldS(l, r), pA);

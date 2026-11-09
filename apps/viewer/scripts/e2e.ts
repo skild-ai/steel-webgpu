@@ -103,7 +103,7 @@ async function controls(page: Page) {
   check((await simTime(page)) < paused, 'reset rewinds sim time');
 
   const point = await findGrabbablePoint(page);
-  check(point !== null, 'hovering a loose body shows the grab cursor');
+  check(point !== null, 'hovering a draggable body shows the grab cursor');
   if (point) {
     await page.mouse.down();
     await page.mouse.move(point.x + 40, point.y - 40, { steps: 5 });

@@ -84,13 +84,12 @@ def shape_points(model, s):
 
 def export_model(
     model, out, *, name, solver=None, targets=None, driven=0, integral_count=0, control=None, info=None, twists=None,
-    targets_per_substep=False,
 ):
     """Write ``scene.json`` and ``scene.bin`` for ``model`` into ``out``.
 
     ``twists`` (bodies x 6: COM linear velocity, angular velocity, world) sets initial free-body
     velocities. ``targets`` (frames x driven, 60 Hz) optionally drives the first ``driven`` dofs of the
-    first articulation (held per frame, or interpolated per substep with ``targets_per_substep``);
+    first articulation (interpolated per substep);
     ``control`` names a per-substep controller; ``info`` is free-form
     scene metadata kept in the JSON.
     """
@@ -294,7 +293,6 @@ def export_model(
         "targets": put(targets.astype(np.float32), np.float32),
         "target_frames": targets.shape[0],
         "driven": driven,
-        "targets_per_substep": bool(targets_per_substep),
         "integral_count": int(integral_count),
         "demo": name,
         "control": control,

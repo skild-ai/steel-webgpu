@@ -276,21 +276,14 @@
   "name": "body_limits",
   "title": "Speed caps",
   "about": "Gold versus grey: a 1 m/s fall-speed cap, a 5 rad/s spin cap, and spin damping on otherwise frictionless spinners.",
-  "category": "Bodies and worlds",
+  "category": "Bodies",
   "short": "Gold bodies have a fall-speed cap, a spin cap and spin damping."
  },
  {
   "name": "kinematic",
   "title": "Kinematic paddle",
   "about": "A paddle moving on a prescribed path sweeps boxes aside; the gold box above floats because its gravity is switched off.",
-  "category": "Bodies and worlds",
+  "category": "Bodies",
   "short": "A paddle on a fixed path sweeps boxes; one box ignores gravity."
- },
- {
-  "name": "worlds",
-  "title": "Parallel worlds",
-  "about": "Sixteen independent worlds run side by side in one simulation, each a pendulum released from a different angle into a tower.",
-  "category": "Bodies and worlds",
-  "short": "16 independent worlds simulated together in one step."
  }
 ]

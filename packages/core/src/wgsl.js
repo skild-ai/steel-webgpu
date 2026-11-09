@@ -1797,9 +1797,10 @@ fn main(@builtin(local_invocation_index) tid: u32) {
   if (tid == 0u) { atomicStore(&sched[S_META + 3u], 0u); }
   if (SLEEP == 1u) { sleep_islands(tid); }
   storageBarrier(); workgroupBarrier();
-  // Baked targets: once per frame, or (TGT_SUB) linearly at every substep's start time.
-  if ((P.substep == 0u || TGT_SUB == 1u) && tid < P.driven) {
-    let frame = clamp((P.phase + select(0.0, f32(P.substep) * P.dt, TGT_SUB == 1u)) * 60.0, 0.0, f32(P.path_frames - 1u));
+  // Baked targets (60 Hz samples), interpolated at every substep's start time so the drives see a smooth
+  // path at any substep count instead of a step per frame.
+  if (tid < P.driven) {
+    let frame = clamp((P.phase + f32(P.substep) * P.dt) * 60.0, 0.0, f32(P.path_frames - 1u));
     let a = u32(frame);
     let b = min(a + 1u, P.path_frames - 1u);
     let pa = statF[SF_PATH + (a * P.driven + tid) / 4u][(a * P.driven + tid) % 4u];

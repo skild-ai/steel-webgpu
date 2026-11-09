@@ -1,6 +1,6 @@
 # steel-webgpu viewer: plain three.js
 
-The full scene viewer on `steel-webgpu` and `@steel-webgpu/three` alone, with no UI framework: all 41 scenes by category, a
+The full scene viewer on `steel-webgpu` and `@steel-webgpu/three` alone, with no UI framework: all scenes by category, a
 scene picker and gallery, HUD stats, play, pause and reset, drag-to-pull, the compare toggle and solver controls.
 `apps/viewer` is the same viewer on `@steel-webgpu/react`.
 

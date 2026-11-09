@@ -161,7 +161,7 @@ export function Scene({
     orbitControls.maxPolarAngle = MAX_POLAR_ANGLE;
     orbitControls.enabled = controls;
     orbitControls.update();
-    // DragPull listens first, so a grab on a loose body stops the orbit before it starts.
+    // DragPull listens first, so a grab on a body stops the orbit before it starts.
     const drag = pickable ? new DragPull(gl.domElement, camera, world.graph, world, orbitControls) : null;
     orbitControls.connect(gl.domElement);
     orbit.current = orbitControls;

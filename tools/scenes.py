@@ -193,25 +193,6 @@ def vel_limit():
     return b, {}, "Velocity limits: the grey double pendulum swings freely; the gold one is held to 1.5 rad/s per joint.", {}
 
 
-def worlds():
-    """Batched worlds: 16 copies of a pendulum-and-tower scene stepped in one Sim, one world per cell."""
-    b = builder()
-    b.add_ground_plane()
-    for w in range(16):
-        cell = builder()
-        swing = math.radians(30 + 4 * w)  # each world releases its pendulum from a different angle
-        arm = cell.add_link(xform=tf((0.0, 0.0, 0.5)))
-        cell.add_shape_capsule(arm, xform=tf(q=wp.quat_rpy(0.0, math.pi / 2, 0.0)), radius=0.015, half_height=0.12, cfg=cfg(density=400), color=GREY)
-        cell.add_shape_sphere(arm, xform=tf((0.16, 0, 0)), radius=0.04, cfg=cfg(density=4000), color=RED)
-        j = cell.add_joint_revolute(-1, arm, parent_xform=tf((-0.2, 0, 0.5), wp.quat_rpy(0.0, -swing, 0.0)), axis=(0, 1, 0))
-        cell.add_articulation([j])
-        for k in range(3):
-            box = cell.add_body(xform=tf((0.0, 0.0, 0.03 + 0.06 * k)))
-            cell.add_shape_box(box, hx=0.03, hy=0.05, hz=0.03, cfg=cfg(density=300), color=[BLUE, TEAL, GOLD][k])
-        b.add_world(cell, xform=tf(((w % 4 - 1.5) * 0.6, (w // 4 - 1.5) * 0.6, 0.0)))
-    return b, {}, "Batched worlds: 16 worlds, each a pendulum released from a different angle into a tower, in one Sim."
-
-
 def linkages():
     """Mimic joints and a revolute loop closure: mirrored pendulums and a crank-driven four-bar."""
     b = builder()
@@ -514,7 +495,7 @@ def trebuchet():
     return b, {}, "Trebuchet: a hinged arm with a hung counterweight throws a boulder from its cup at a dry-stacked brick wall."
 
 
-SCENES = {"dominoes": dominoes, "bounce": bounce, "spin_roll": spin_roll, "ragdoll": ragdoll, "d6": d6, "vel_limit": vel_limit, "worlds": worlds, "linkages": linkages, "incline": incline, "overlap": overlap, "rods": rods, "drives": drives, "body_limits": body_limits, "sleeping": sleeping, "torsion": torsion, "dumbbells": dumbbells, "compliance": compliance, "load_friction": load_friction, "kinematic": kinematic, "card_house": card_house, "ratio_stack": ratio_stack, "trebuchet": trebuchet}
+SCENES = {"dominoes": dominoes, "bounce": bounce, "spin_roll": spin_roll, "ragdoll": ragdoll, "d6": d6, "vel_limit": vel_limit, "linkages": linkages, "incline": incline, "overlap": overlap, "rods": rods, "drives": drives, "body_limits": body_limits, "sleeping": sleeping, "torsion": torsion, "dumbbells": dumbbells, "compliance": compliance, "load_friction": load_friction, "kinematic": kinematic, "card_house": card_house, "ratio_stack": ratio_stack, "trebuchet": trebuchet}
 SOLVER = {"vel_limit": {"enable_joint_velocity_limits": True}, "incline": {"contact_regularization": 0.0}, "overlap": {"velocity_iterations": 4}, "rods": {"friction_mode": "bisection_desaxce"}, "drives": {"drive_mode": "rows", "enable_joint_velocity_limits": True}, "sleeping": {"enable_sleeping": True}, "dumbbells": {"enable_torsional_rolling_friction": True, "friction_anchor_beta": 0.0}, "compliance": {"contact_compliance": True, "enable_restitution": False}, "load_friction": {"enable_joint_friction": True}, "ratio_stack": {"substeps": 8, "iterations": 16, "nesterov_momentum": True}, "trebuchet": {"nesterov_momentum": True, "enable_sleeping": True}, "dominoes": {"enable_sleeping": True}, "card_house": {"enable_sleeping": True}}
 
 
@@ -546,7 +527,6 @@ CAMERA = {
     "overlap": {"eye": (0.5, -1.3, 0.6), "target": (0.0, 0.0, 0.12)},
     "incline": {"eye": (0.4, -1.9, 1.1), "target": (0.0, 0.0, 0.4)},
     "linkages": {"eye": (0.6, -1.5, 0.8), "target": (0.05, 0.0, 0.4)},
-    "worlds": {"eye": (1.6, -2.6, 2.0), "target": (0.0, 0.0, 0.1)},
 }
 
 

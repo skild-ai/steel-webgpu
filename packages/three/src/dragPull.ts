@@ -8,14 +8,14 @@ export interface PullTarget {
   poses(): Float32Array | null;
   /** Asks for a fresh snapshot; hover and grabs use it once it lands. */
   refreshPoses(): void;
-  isLoose(body: number): boolean;
+  isDraggable(body: number): boolean;
   pick: DragState | null;
 }
 
 const WHEEL_DEPTH_PER_DELTA = 0.0005;
 
 /**
- * Drag a loose body to pull it with a spring toward the cursor; scroll while dragging changes depth.
+ * Drag a body to pull it with a spring toward the cursor; scroll while dragging changes depth.
  * Construct before OrbitControls connects, so a grab disables orbiting before its pointerdown handler runs.
  */
 export class DragPull {
@@ -56,7 +56,7 @@ export class DragPull {
     this.ray(event);
     for (const hit of this.raycaster.intersectObjects(this.graph.pickBodies, true)) {
       const body: number | undefined = hit.object.userData.body;
-      if (body === undefined || !this.target.isLoose(body)) continue;
+      if (body === undefined || !this.target.isDraggable(body)) continue;
       const local = this.graph.pickBodies[body].worldToLocal(hit.point.clone()).sub(this.graph.bodyCom(body));
       return { body, point: hit.point.clone(), local: local.toArray() };
     }
