@@ -6,13 +6,15 @@ A WebGPU port of the Steel solver from [Newton](https://github.com/newton-physic
 
 A browser with WebGPU: Chrome, Edge or Safari, on desktop or mobile.
 
-## Packages
+## Package
 
-| Package | |
+[`@skild-ai/steel-webgpu`](packages/steel-webgpu) is one package with three entry points:
+
+| Import | |
 | --- | --- |
-| [`@skild-ai/steel-webgpu`](packages/core) | The engine: `Sim`, `SceneBuilder`, scene loading, URDF, MJCF and USDA import |
-| [`@skild-ai/steel-webgpu-three`](packages/three) | three.js rendering, picking and drag |
-| [`@skild-ai/steel-webgpu-react`](packages/react) | React Three Fiber components and hooks |
+| `@skild-ai/steel-webgpu` | The engine: `Sim`, `SceneBuilder`, scene loading, URDF, MJCF and USDA import |
+| `@skild-ai/steel-webgpu/three` | three.js rendering, picking and drag |
+| `@skild-ai/steel-webgpu/react` | React Three Fiber components and hooks |
 
 ## Install
 
@@ -21,13 +23,14 @@ A browser with WebGPU: Chrome, Edge or Safari, on desktop or mobile.
 bun add @skild-ai/steel-webgpu
 
 # With three.js
-bun add @skild-ai/steel-webgpu-three @skild-ai/steel-webgpu three typegpu
+bun add @skild-ai/steel-webgpu three typegpu
 
 # With React Three Fiber
-bun add @skild-ai/steel-webgpu-react three typegpu @react-three/fiber react react-dom
+bun add @skild-ai/steel-webgpu three typegpu @react-three/fiber react react-dom
 ```
 
-With npm or pnpm, use `npm install` or `pnpm add` in place of `bun add`. Each package's README has a quick start.
+With npm or pnpm, use `npm install` or `pnpm add` in place of `bun add`. The [package README](packages/steel-webgpu)
+has a quick start for each entry point.
 Newton models export to a scene folder with `tools/newton_export.py`.
 
 ## Development

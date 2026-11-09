@@ -1,4 +1,4 @@
-import { sceneLoader } from '@skild-ai/steel-webgpu-three';
+import { sceneLoader } from '@skild-ai/steel-webgpu/three';
 import { initDevice, UnsupportedError, type SceneEntry } from '@skild-ai/steel-webgpu';
 import { Gallery } from './gallery';
 import { Hud, PLAIN_TITLE } from './hud';

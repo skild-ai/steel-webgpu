@@ -1,4 +1,4 @@
-import { Physics, Scene, useSimStats, type SimStatsSample } from '@skild-ai/steel-webgpu-react';
+import { Physics, Scene, useSimStats, type SimStatsSample } from '@skild-ai/steel-webgpu/react';
 import { useEffect, useState, useSyncExternalStore, type CSSProperties } from 'react';
 import { Playground } from './Playground';
 

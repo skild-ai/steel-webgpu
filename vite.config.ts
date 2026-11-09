@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite-plus';
 
 // Upstream's engine, tools and exported scenes stay byte-for-byte as upstream writes them, so main merges apply cleanly.
-const upstream = ['assets/**', 'packages/core/src/*.js', 'tools/**'];
+const upstream = ['assets/**', 'packages/steel-webgpu/src/*.js', 'tools/**'];
 
 export default defineConfig({
   fmt: {

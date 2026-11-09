@@ -7,7 +7,7 @@ import {
   SphereCollider,
   useBeforeStep,
   type RigidBodyHandle,
-} from '@skild-ai/steel-webgpu-react';
+} from '@skild-ai/steel-webgpu/react';
 import { useRef } from 'react';
 import type { Quat, Vec3 } from '@skild-ai/steel-webgpu';
 

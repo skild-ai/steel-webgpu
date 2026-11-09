@@ -1,6 +1,6 @@
 'use client';
 
-import { Physics, Scene } from '@skild-ai/steel-webgpu-react';
+import { Physics, Scene } from '@skild-ai/steel-webgpu/react';
 import type { CSSProperties } from 'react';
 
 const message: CSSProperties = { display: 'grid', placeItems: 'center', height: '100%', margin: 0, padding: 24, textAlign: 'center' };
