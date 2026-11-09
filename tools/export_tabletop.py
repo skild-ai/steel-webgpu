@@ -84,6 +84,11 @@ def build(demo):
     )
     info = {}
     ex.populate(b, info, ee, down, fingers)
+    if task == "crane":
+        # Lighter slew friction than the example's 3.5 N m: the crane coasts on a little after the release
+        # instead of stopping dead, and turns further (1.53 rad against 1.42).
+        slew = next(i for i, label in enumerate(b.joint_label) if label.endswith("crane_slew_q"))
+        b.joint_friction[b.joint_qd_start[slew]] = 1.0
     driven = b._tabletop_driven_dofs
     waypoints = info.pop("waypoints")
     times = np.array([p[0] for p in waypoints])
