@@ -85,7 +85,10 @@ def hoberman(substeps):
 def dr_legs(substeps):
     """The DR legs robot walking its 22.4 s clip (the example's --animated run), then standing on its last pose."""
     os.environ["SHELF_SOLVER"] = "steel_walk"
-    mod = shelf_module("shelf/06_looped_linkages_contacts/kamino_robot_dr_legs/example.py")
+    path = "shelf/06_looped_linkages_contacts/loop_dr_legs/example.py"
+    if not (Path(os.getcwd()) / path).exists():  # checkouts from before the scene renames
+        path = "shelf/06_looped_linkages_contacts/kamino_robot_dr_legs/example.py"
+    mod = shelf_module(path)
     args = types.SimpleNamespace(world_count=1, animated=True, closures="revolute", test=False, use_kamino_contacts=False, joint_effort_limit=None)
     ex = mod.Example(newton.viewer.ViewerNull(), args)
     model = ex.model
