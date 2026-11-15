@@ -400,16 +400,25 @@ export async function loadMJCF(builder, text, { baseUrl, xform = IDENTITY, loadM
   await walk(world, -1, xform, IDENTITY, 'main');
 
   // Actuators: position (kp, kv) and velocity (kv) set the joint's drive gains.
+  // forcerange caps the drive's torque (effortLimit), as MuJoCo clamps the actuator's force: when forcelimited is
+  // true, or left to autolimits (MuJoCo's default) and a range is given.
+  const autolimits = (compiler?.getAttribute('autolimits') ?? 'true') === 'true';
+  const effortOf = (a) => {
+    const limited = a.forcelimited === 'true' || (a.forcelimited !== 'false' && autolimits && a.forcerange !== undefined);
+    const [lo, hi] = nums(a.forcerange, [0, 0]);
+    return limited && hi > lo ? { effortLimit: Math.max(Math.abs(lo), Math.abs(hi)) } : {};
+  };
   for (const act of kids(doc, 'actuator').flatMap((a) => [...a.children])) {
     const a = attrs(act);
     const target = dofOf.get(a.joint);
     if (!target) continue;
-    if (act.tagName === 'position') builder.setJointDofConfig(target[0], target[1], { targetKe: +(a.kp ?? 1), targetKd: +(a.kv ?? 0) });
-    else if (act.tagName === 'velocity') builder.setJointDofConfig(target[0], target[1], { targetKd: +(a.kv ?? 1) });
+    const effort = effortOf(a);
+    if (act.tagName === 'position') builder.setJointDofConfig(target[0], target[1], { targetKe: +(a.kp ?? 1), targetKd: +(a.kv ?? 0), ...effort });
+    else if (act.tagName === 'velocity') builder.setJointDofConfig(target[0], target[1], { targetKd: +(a.kv ?? 1), ...effort });
     else if (act.tagName === 'general' && a.biastype === 'affine') {
       // A PD servo (gain kp, bias -kp, -kv) becomes the joint drive; Newton leaves it to MuJoCo's actuators.
       const g = nums(a.gainprm, [1]), b = nums(a.biasprm, [0, 0, 0]);
-      if (Math.abs(g[0] + (b[1] ?? 0)) <= 1e-9 * Math.abs(g[0])) builder.setJointDofConfig(target[0], target[1], { targetKe: g[0], targetKd: -(b[2] ?? 0) });
+      if (Math.abs(g[0] + (b[1] ?? 0)) <= 1e-9 * Math.abs(g[0])) builder.setJointDofConfig(target[0], target[1], { targetKe: g[0], targetKd: -(b[2] ?? 0), ...effort });
     }
   }
   // <contact><exclude body1 body2>: no collisions between the two bodies' shapes.
