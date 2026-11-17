@@ -65,7 +65,10 @@ export declare class Sim {
   readonly NB: number;
   /** Per body: 0 static, 1 loose (draggable), 2 articulated or kinematic. */
   readonly bodyKind: readonly number[];
-  /** Per body: whether the mouse spring may pull it (free bodies and links of undriven articulations; none when the scene sets `mouse_drag` false). */
+  /**
+   * Per body: whether the mouse spring may pull it. Free bodies and links of undriven articulations; links of driven ones too when the
+   * scene sets `mouse_drag` to `'all'`, and none when it sets it false.
+   */
   readonly draggable: readonly boolean[];
   /** Poses: per body COM position (vec4) then quaternion x, y, z, w (vec4). */
   readonly buffers: { poses: GPUBuffer } & Record<string, GPUBuffer>;
